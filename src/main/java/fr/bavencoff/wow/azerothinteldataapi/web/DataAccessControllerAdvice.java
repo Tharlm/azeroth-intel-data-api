@@ -1,11 +1,7 @@
 package fr.bavencoff.wow.azerothinteldataapi.web;
 
-import fr.bavencoff.wow.apis.exceptions.realms.RealmAlreadyExistException;
-import fr.bavencoff.wow.apis.exceptions.realms.RealmNotFoundException;
-import fr.bavencoff.wow.apis.exceptions.regions.RegionNotFoundException;
-import fr.bavencoff.wow.web.exceptions.realms.RealmAlreadyExistResponseException;
-import fr.bavencoff.wow.web.exceptions.realms.RealmNotFoundResponseException;
-import fr.bavencoff.wow.web.exceptions.regions.RegionNotFoundResponseException;
+import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.regions.RegionNotFoundException;
+import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.exceptions.RegionNotFoundResponseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -34,9 +30,7 @@ public class DataAccessControllerAdvice extends ResponseEntityExceptionHandler {
 
 
     @ExceptionHandler({
-            RegionNotFoundException.class,
-            RealmNotFoundException.class,
-            RealmAlreadyExistException.class
+            RegionNotFoundException.class
     })
     public ResponseEntity<Object> handleCustomException(
             Exception e,
@@ -44,10 +38,6 @@ public class DataAccessControllerAdvice extends ResponseEntityExceptionHandler {
     ) throws Exception {
         if (e instanceof RegionNotFoundException subEx) {
             return handleException(new RegionNotFoundResponseException(subEx), request);
-        } else if (e instanceof RealmNotFoundException subEx) {
-            return handleException(new RealmNotFoundResponseException(subEx), request);
-        } else if (e instanceof RealmAlreadyExistException subEx) {
-            return handleException(new RealmAlreadyExistResponseException(subEx), request);
         } else {
             throw e;
         }

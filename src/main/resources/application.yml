@@ -1,0 +1,31 @@
+blizzard-api:
+  urls:
+    base-url: http://localhost:3000/
+
+spring:
+  application:
+    name: azeroth-intel-data-api
+  cache:
+    jcache:
+      config: classpath:ehcache.xml
+      provider: org.ehcache.jsr107.EhcacheCachingProvider
+    type: jcache
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: myuser
+    password: mypassword
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 500
+        order_updates: true
+        order_inserts: true
+        batch_versioned_data: true
+  reactor:
+    context-propagation: auto
+
+springdoc:
+  show-actuator: true
+
