@@ -26,11 +26,12 @@ public class RegionWebService {
     public GetRegionResponseDto getRegion(
             Short id
     ) {
-        log.info("Getting region with id {}", id);
+        log.debug("Getting region with id {}", id);
         return mapper.apiToDto(this.serviceExporter.getRegion(id));
     }
 
     public GetRegionsResponseDto getRegions() {
+        log.debug("Retrieve all regions");
         return mapper.apisToDtos(this.serviceExporter.getRegions());
     }
 }
