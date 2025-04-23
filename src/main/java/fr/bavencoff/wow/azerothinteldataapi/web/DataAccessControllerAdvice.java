@@ -1,7 +1,5 @@
 package fr.bavencoff.wow.azerothinteldataapi.web;
 
-import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.regions.RegionNotFoundException;
-import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.exceptions.RegionNotFoundResponseException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -28,20 +26,6 @@ public class DataAccessControllerAdvice extends ResponseEntityExceptionHandler {
         this.clock = clock;
     }
 
-
-    @ExceptionHandler({
-            RegionNotFoundException.class
-    })
-    public ResponseEntity<Object> handleCustomException(
-            Exception e,
-            WebRequest request
-    ) throws Exception {
-        if (e instanceof RegionNotFoundException subEx) {
-            return handleException(new RegionNotFoundResponseException(subEx), request);
-        } else {
-            throw e;
-        }
-    }
 
     @ExceptionHandler({
             Exception.class

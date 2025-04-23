@@ -1,15 +1,15 @@
 package fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.impl;
 
+import fr.bavencoff.wow.azerothinteldataapi.common.mappers.AzerothMapperParent;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionApi;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionResponseDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionsResponseDto;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
 
 import java.util.List;
 
 @Mapper(
-        componentModel = MappingConstants.ComponentModel.SPRING
+        config = AzerothMapperParent.class
 )
 public interface RegionWebMapper {
 

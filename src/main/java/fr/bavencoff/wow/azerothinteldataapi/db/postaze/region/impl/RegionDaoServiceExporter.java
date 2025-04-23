@@ -1,7 +1,7 @@
 package fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.impl;
 
-import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.regions.RegionNotFoundException;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
+import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.exceptions.RegionNotFoundResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class RegionDaoServiceExporter {
     public RegionDao findById(Short id) {
         Optional<RegionDao> regionDao = this.findOptionalById(id);
         if (regionDao.isEmpty()) {
-            throw new RegionNotFoundException(id);
+            throw new RegionNotFoundResponseException(id);
         }
         return regionDao.get();
     }
