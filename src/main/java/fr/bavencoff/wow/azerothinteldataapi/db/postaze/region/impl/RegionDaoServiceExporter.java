@@ -11,13 +11,13 @@ import java.util.Optional;
 
 /**
  * Service class that provides access to region data from the database.
- * 
+ * <p>
  * This service is responsible for:
  * 1. Retrieving region data from the database through RegionDaoRepository
  * 2. Caching frequently accessed data to improve performance
  * 3. Handling not-found scenarios by throwing appropriate exceptions
  * 4. Providing a clean API for accessing region data to higher layers
- * 
+ * <p>
  * It acts as the primary interface between the database and the application's
  * business logic for region-related operations.
  */
@@ -39,7 +39,7 @@ public class RegionDaoServiceExporter {
 
     /**
      * Retrieves a specific region by its ID.
-     * 
+     * <p>
      * This method is cached to improve performance for frequently accessed regions.
      * If the region is not found, a RegionNotFoundResponseException is thrown.
      *
@@ -58,7 +58,7 @@ public class RegionDaoServiceExporter {
 
     /**
      * Retrieves an Optional containing a region by its ID.
-     * 
+     * <p>
      * This method provides a way to check for existence without throwing exceptions.
      *
      * @param id The unique identifier of the region to retrieve
