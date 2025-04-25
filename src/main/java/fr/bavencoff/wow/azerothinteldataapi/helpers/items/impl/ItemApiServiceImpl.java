@@ -1,16 +1,16 @@
 package fr.bavencoff.wow.azerothinteldataapi.helpers.items.impl;
 
+import fr.bavencoff.wow.azerothinteldataapi.common.enums.KeyParameterType;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.items.dao.ItemClass;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.items.dao.ItemDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.items.dao.ItemSubclass;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.items.dao.ItemSubclassId;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.items.impl.ItemServiceExporter;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.KeyParameterType;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.ParameterTypeDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.impl.ParameterTypeServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.items.model.CreateItemApi;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.items.model.ItemApi;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.items.model.ItemClassApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl.ParametersServiceHelper;
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -21,16 +21,16 @@ import java.util.Optional;
 @Service
 public class ItemApiServiceImpl implements ItemApiService {
     private final ItemServiceExporter itemServiceExporter;
-    private final ParameterTypeServiceExporter parameterTypeServiceExporter;
+    private final ParametersServiceHelper parameterTypeServiceHelper;
     private final ItemApiMapper itemApiMapper;
 
     public ItemApiServiceImpl(
             final ItemServiceExporter itemServiceExporter,
-            final ParameterTypeServiceExporter parameterTypeServiceExporter,
+            final ParametersServiceHelper parameterTypeServiceHelper,
             final ItemApiMapper itemApiMapper
     ) {
         this.itemServiceExporter = itemServiceExporter;
-        this.parameterTypeServiceExporter = parameterTypeServiceExporter;
+        this.parameterTypeServiceHelper = parameterTypeServiceHelper;
         this.itemApiMapper = itemApiMapper;
     }
 
@@ -126,7 +126,7 @@ public class ItemApiServiceImpl implements ItemApiService {
                 dao.getQuality() == null ||
                         !StringUtils.equals(dao.getQuality().getType(), api.getQuality().getType())
         ) {
-            ParameterTypeDao roleParam = this.parameterTypeServiceExporter.getParameterType(
+            ParameterTypeDao roleParam = this.parameterTypeServiceHelper.getParameterType(
                     KeyParameterType.ITQ,
                     api.getQuality().getType(),
                     api.getQuality().getName()
@@ -143,7 +143,7 @@ public class ItemApiServiceImpl implements ItemApiService {
                 dao.getInventory() == null ||
                         !StringUtils.equals(dao.getInventory().getType(), api.getInventory().getType())
         ) {
-            ParameterTypeDao roleParam = this.parameterTypeServiceExporter.getParameterType(
+            ParameterTypeDao roleParam = this.parameterTypeServiceHelper.getParameterType(
                     KeyParameterType.ITI,
                     api.getInventory().getType(),
                     api.getInventory().getName()

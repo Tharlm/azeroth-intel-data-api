@@ -1,17 +1,17 @@
 package fr.bavencoff.wow.azerothinteldataapi.helpers.realms.impl;
 
-import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.realms.RealmAlreadyExistException;
-import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.connectedrealms.ConnectedRealmAlreadyExistsException;
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
+import fr.bavencoff.wow.azerothinteldataapi.common.enums.KeyParameterType;
+import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.connectedrealms.ConnectedRealmAlreadyExistsException;
+import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.realms.RealmAlreadyExistException;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.ConnectedRealmDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl.ConnectedRealmServiceExporter;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.KeyParameterType;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.ParameterTypeDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.impl.ParameterTypeServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.dao.RealmDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.impl.RegionDaoServiceExporter;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl.ParametersServiceHelper;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.ConnectedRealmApi;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.RealmApi;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +27,7 @@ public class RealmsApiServiceImpl implements RealmApiService {
 
     private final RealmServiceExporter realmServiceExporter;
     private final RegionDaoServiceExporter regionsServiceExporter;
-    private final ParameterTypeServiceExporter typeServiceExporter;
+    private final ParametersServiceHelper typeServiceHelper;
     private final ConnectedRealmServiceExporter connectedRealmServiceExporter;
     private final RealmUtilsApiMapper realmMapper;
 
@@ -35,13 +35,13 @@ public class RealmsApiServiceImpl implements RealmApiService {
     public RealmsApiServiceImpl(
             final RealmServiceExporter realmServiceExporter,
             final RegionDaoServiceExporter regionsServiceExporter,
-            final ParameterTypeServiceExporter typeServiceExporter,
+            final ParametersServiceHelper typeServiceHelper,
             final ConnectedRealmServiceExporter connectedRealmServiceExporter,
             final RealmUtilsApiMapper realmMapper
     ) {
         this.realmServiceExporter = realmServiceExporter;
         this.regionsServiceExporter = regionsServiceExporter;
-        this.typeServiceExporter = typeServiceExporter;
+        this.typeServiceHelper = typeServiceHelper;
         this.connectedRealmServiceExporter = connectedRealmServiceExporter;
         this.realmMapper = realmMapper;
     }
@@ -134,10 +134,11 @@ public class RealmsApiServiceImpl implements RealmApiService {
 
     /**
      * Enregistre les informations un realm
-     * @param realmDao le realm
+     *
+     * @param realmDao       le realm
      * @param connectedRealm le CR parent
-     * @param region la region
-     * @param info les informations à mettre à jour
+     * @param region         la region
+     * @param info           les informations à mettre à jour
      * @return
      */
     private RealmDao saveRealm(
@@ -157,7 +158,7 @@ public class RealmsApiServiceImpl implements RealmApiService {
                 realmDao.getType().getType(),
                 info.getType().getType()
         )) {
-            ParameterTypeDao parameterTypeDao = this.typeServiceExporter.getParameterType(
+            ParameterTypeDao parameterTypeDao = this.typeServiceHelper.getParameterType(
                     KeyParameterType.REA,
                     info.getType().getType(),
                     info.getType().getLabel()
@@ -181,6 +182,7 @@ public class RealmsApiServiceImpl implements RealmApiService {
 
     /**
      * {@inheritDoc}
+     *
      * @param id ID du CR
      */
     @Override
@@ -233,9 +235,10 @@ public class RealmsApiServiceImpl implements RealmApiService {
 
     /**
      * Enregistre ou modifie un CR
-     * @param id id du CR
+     *
+     * @param id     id du CR
      * @param region region
-     * @param infos information
+     * @param infos  information
      * @return CR modifié / créé
      */
     private ConnectedRealmDao createOrUpdateConnectedRealm(
@@ -254,9 +257,10 @@ public class RealmsApiServiceImpl implements RealmApiService {
 
     /**
      * Créé un CR. Retourne une exception s'il existe deja un CR avec la même ID
-     * @param id ID du CR
+     *
+     * @param id     ID du CR
      * @param region region
-     * @param infos information
+     * @param infos  information
      * @return CR
      */
     private ConnectedRealmDao createNewConnectedRealm(
@@ -277,9 +281,10 @@ public class RealmsApiServiceImpl implements RealmApiService {
 
     /**
      * Modifie un CR
+     *
      * @param connectedRealmDao entité du CR
-     * @param region region
-     * @param infos information
+     * @param region            region
+     * @param infos             information
      * @return entité màj
      */
     private ConnectedRealmDao updateConnectedRelm(
@@ -292,9 +297,10 @@ public class RealmsApiServiceImpl implements RealmApiService {
 
     /**
      * Enregistre les infos sur un CR
+     *
      * @param connectedRealmDao entité du CR
-     * @param regionDao region
-     * @param infos infos à mettre à jour
+     * @param regionDao         region
+     * @param infos             infos à mettre à jour
      * @return entité màj
      */
     private ConnectedRealmDao saveConnectedRealm(
@@ -310,7 +316,7 @@ public class RealmsApiServiceImpl implements RealmApiService {
                 connectedRealmDao.getPopulation() == null ||
                         !StringUtils.equals(connectedRealmDao.getPopulation().getType(), infos.getPopulation().getType())
         ) {
-            ParameterTypeDao populationParam = this.typeServiceExporter.getParameterType(
+            ParameterTypeDao populationParam = this.typeServiceHelper.getParameterType(
                     KeyParameterType.CRP,
                     infos.getPopulation().getType(),
                     infos.getPopulation().getLabel()
@@ -327,7 +333,7 @@ public class RealmsApiServiceImpl implements RealmApiService {
                 connectedRealmDao.getStatus() == null ||
                         !StringUtils.equals(connectedRealmDao.getStatus().getType(), infos.getStatus().getType())
         ) {
-            ParameterTypeDao statusParam = this.typeServiceExporter.getParameterType(
+            ParameterTypeDao statusParam = this.typeServiceHelper.getParameterType(
                     KeyParameterType.CRS,
                     infos.getStatus().getType(),
                     infos.getStatus().getLabel()

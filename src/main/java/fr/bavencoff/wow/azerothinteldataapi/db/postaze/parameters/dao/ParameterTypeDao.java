@@ -1,5 +1,6 @@
 package fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao;
 
+import fr.bavencoff.wow.azerothinteldataapi.common.enums.KeyParameterType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

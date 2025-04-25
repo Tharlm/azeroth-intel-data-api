@@ -1,4 +1,4 @@
-package fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao;
+package fr.bavencoff.wow.azerothinteldataapi.common.enums;
 
 import lombok.Getter;
 

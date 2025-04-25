@@ -1,19 +1,19 @@
 package fr.bavencoff.wow.azerothinteldataapi.helpers.playables.impl;
 
+import fr.bavencoff.wow.azerothinteldataapi.common.enums.KeyParameterType;
 import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.playableraces.PlayableRaceAlreadyExistsException;
 import fr.bavencoff.wow.azerothinteldataapi.common.utils.NumberUtils;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.playables.model.PlayableClassApi;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.playables.model.PlayableRaceApi;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.playables.model.PlayableSpecializationApi;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.KeyParameterType;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.ParameterTypeDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.impl.ParameterTypeServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.playableclass.dao.PlayableClassDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.playableclass.impl.PlayableClassServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.playablerace.dao.PlayableRaceDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.playablerace.impl.PlayableRaceServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.playablespe.dao.PlayableSpecializationDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.playablespe.impl.PlayableSpecializationDaoServiceExporter;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl.ParametersServiceHelper;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.playables.model.PlayableClassApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.playables.model.PlayableRaceApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.playables.model.PlayableSpecializationApi;
 import jakarta.transaction.Transactional;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,7 @@ public class PlayableApiServiceImpl implements PlayableClassApiService, Playable
 
     private final PlayableRaceServiceExporter playableRaceServiceExporter;
     private final PlayableClassServiceExporter playableClassServiceExporter;
-    private final ParameterTypeServiceExporter typeServiceExporter;
+    private final ParametersServiceHelper parameterTypeServiceExporter;
     private final PlayableSpecializationDaoServiceExporter playableSpecializationServiceExporter;
     private final PlayableRaceApiMapper raceMapper;
 
@@ -35,13 +35,13 @@ public class PlayableApiServiceImpl implements PlayableClassApiService, Playable
     public PlayableApiServiceImpl(
             final PlayableRaceServiceExporter playableRaceServiceExporter,
             final PlayableClassServiceExporter playableClassServiceExporter,
-            final ParameterTypeServiceExporter typeServiceExporter,
+            final ParametersServiceHelper parameterTypeServiceExporter,
             final PlayableSpecializationDaoServiceExporter playableSpecializationDaoServiceExporter,
             final PlayableRaceApiMapper raceMapper
     ) {
         this.playableRaceServiceExporter = playableRaceServiceExporter;
         this.playableClassServiceExporter = playableClassServiceExporter;
-        this.typeServiceExporter = typeServiceExporter;
+        this.parameterTypeServiceExporter = parameterTypeServiceExporter;
         this.playableSpecializationServiceExporter = playableSpecializationDaoServiceExporter;
         this.raceMapper = raceMapper;
     }
@@ -99,7 +99,7 @@ public class PlayableApiServiceImpl implements PlayableClassApiService, Playable
                 playableRaceDao.getFaction() == null ||
                         !StringUtils.equals(playableRaceDao.getFaction().getType(), information.getFaction().getType())
         ) {
-            ParameterTypeDao factionParam = this.typeServiceExporter.getParameterType(
+            ParameterTypeDao factionParam = this.parameterTypeServiceExporter.getParameterType(
                     KeyParameterType.PRF,
                     information.getFaction().getType(),
                     information.getFaction().getLabel()
@@ -240,7 +240,7 @@ public class PlayableApiServiceImpl implements PlayableClassApiService, Playable
                 dao.getRole() == null ||
                         !StringUtils.equals(dao.getRole().getType(), api.getRole().getType())
         ) {
-            ParameterTypeDao roleParam = this.typeServiceExporter.getParameterType(
+            ParameterTypeDao roleParam = this.parameterTypeServiceExporter.getParameterType(
                     KeyParameterType.PSR,
                     api.getRole().getType(),
                     api.getRole().getName()
@@ -256,7 +256,7 @@ public class PlayableApiServiceImpl implements PlayableClassApiService, Playable
                 dao.getPrimaryStat() == null ||
                         !StringUtils.equals(dao.getPrimaryStat().getType(), api.getPrimaryStatType().getType())
         ) {
-            ParameterTypeDao primaryStatParam = this.typeServiceExporter.getParameterType(
+            ParameterTypeDao primaryStatParam = this.parameterTypeServiceExporter.getParameterType(
                     KeyParameterType.PSP,
                     api.getRole().getType(),
                     api.getRole().getName()
