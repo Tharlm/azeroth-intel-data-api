@@ -1,4 +1,4 @@
-package fr.bavencoff.wow.azerothinteldataapi.integration.web.controllers.regions;
+package fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.conf.ClockTestConfiguration;
 import org.junit.jupiter.api.DisplayName;

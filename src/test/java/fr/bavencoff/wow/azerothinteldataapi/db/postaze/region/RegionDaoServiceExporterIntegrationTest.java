@@ -1,5 +1,6 @@
-package fr.bavencoff.wow.azerothinteldataapi.integration.db;
+package fr.bavencoff.wow.azerothinteldataapi.db.postaze.region;
 
+import fr.bavencoff.wow.azerothinteldataapi.common.conf.TestCacheConfig;
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.impl.RegionDaoServiceExporter;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -33,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  */
 @ActiveProfiles("test")
 @DataJpaTest
-@Import(RegionDaoServiceExporter.class)
+@Import({RegionDaoServiceExporter.class, TestCacheConfig.class})
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class RegionDaoServiceExporterIntegrationTest {
 
@@ -121,5 +123,19 @@ class RegionDaoServiceExporterIntegrationTest {
         assertEquals((short) 3, result.get(2).getId());
         assertEquals("Europe", result.get(2).getName());
         assertEquals(GlobalRegion.EU, result.get(2).getTag());
+    }
+
+    @Test
+    void findById_ShouldUseCache() {
+        Short id = 1;
+
+        // 1re appel – va taper dans la base
+        RegionDao firstCall = regionDaoServiceExporter.findById(id);
+
+        // 2e appel – devrait venir du cache
+        RegionDao secondCall = regionDaoServiceExporter.findById(id);
+
+        // Vérifie que c'est bien la même instance (optionnel)
+        assertSame(firstCall, secondCall);
     }
 }
