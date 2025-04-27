@@ -4,7 +4,7 @@ import fr.bavencoff.wow.azerothinteldataapi.db.postaze.auctionhouse.dao.AuctionH
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.auctionhouse.dao.AuctionHouseIdDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.auctionhouse.impl.AuctionHouseDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.ConnectedRealmDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl.ConnectedRealmServiceExporter;
+import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl.ConnectedRealmDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.impl.RegionDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.auctionhouse.model.CreateAuctionHouseApi;
@@ -19,15 +19,15 @@ import java.util.stream.Collectors;
 public class AuctionHouseApiServiceImpl implements AuctionHouseApiService {
 
     private final AuctionHouseDaoServiceExporter auctionHouseDaoServiceExporter;
-    private final ConnectedRealmServiceExporter connectedRealmServiceExporter;
+    private final ConnectedRealmDaoServiceExporter connectedRealmDaoServiceExporter;
     private final RegionDaoServiceExporter regionDaoServiceExporter;
 
     public AuctionHouseApiServiceImpl(
             final AuctionHouseDaoServiceExporter auctionHouseDaoServiceExporter,
-            final ConnectedRealmServiceExporter connectedRealmServiceExporter,
+            final ConnectedRealmDaoServiceExporter connectedRealmDaoServiceExporter,
             RegionDaoServiceExporter regionDaoServiceExporter) {
         this.auctionHouseDaoServiceExporter = auctionHouseDaoServiceExporter;
-        this.connectedRealmServiceExporter = connectedRealmServiceExporter;
+        this.connectedRealmDaoServiceExporter = connectedRealmDaoServiceExporter;
         this.regionDaoServiceExporter = regionDaoServiceExporter;
     }
 
@@ -51,7 +51,7 @@ public class AuctionHouseApiServiceImpl implements AuctionHouseApiService {
     public void updateOrCreateAuctionHouse(List<CreateAuctionHouseApi> apis, Integer idConnectedRealm, Short idRegion) {
 
         // retrieve cr and region linked
-        final ConnectedRealmDao connectedRealmDao = connectedRealmServiceExporter.findById(idConnectedRealm);
+        final ConnectedRealmDao connectedRealmDao = connectedRealmDaoServiceExporter.findById(idConnectedRealm);
         final RegionDao regionDao = regionDaoServiceExporter.findById(idRegion);
 
         // we process by batch size, for every element

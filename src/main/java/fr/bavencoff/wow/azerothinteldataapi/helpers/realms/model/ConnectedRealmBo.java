@@ -11,13 +11,13 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class ConnectedRealmApi {
+public class ConnectedRealmBo {
     private Integer id;
     private boolean queue;
     private ParameterApi population;
     private ParameterApi status;
     private RegionApi region;
-    private List<RealmApi> realms;
+    private List<RealmBo> realms;
 }
 
 

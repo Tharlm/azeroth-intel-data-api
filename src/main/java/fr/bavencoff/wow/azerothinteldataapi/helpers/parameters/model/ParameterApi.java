@@ -11,5 +11,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ParameterApi {
     private String type;
-    private String label;
+    private String name;
 }

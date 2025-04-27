@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RealmApi {
+public class RealmBo {
     private Integer id;
     private RegionApi region;
     private String name;
@@ -19,5 +19,5 @@ public class RealmApi {
     private String slug;
     private boolean isTournament;
     private ParameterApi type;
-    private ConnectedRealmApi connectedRealm;
+    private ConnectedRealmBo connectedRealm;
 }

@@ -16,8 +16,15 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for the RegionApiServiceImpl class.
@@ -28,7 +35,7 @@ import static org.mockito.Mockito.*;
  * 3. Returns the appropriate API models
  * 4. Handles exceptions properly
  */
-class RegionApiServiceImplTest {
+class RegionServiceHelperImplTest {
 
     @Mock
     private RegionDaoServiceExporter daoServiceExporter;
@@ -37,7 +44,7 @@ class RegionApiServiceImplTest {
     private RegionApiMapper mapper;
 
     @InjectMocks
-    private RegionApiServiceImpl regionApiService;
+    private RegionServiceHelperImpl regionApiService;
 
     @BeforeEach
     void setUp() {

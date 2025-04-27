@@ -19,7 +19,7 @@ import java.util.List;
  * ensuring proper separation of concerns and data transformation.
  */
 @Service
-public class RegionApiServiceImpl implements RegionApiService {
+public class RegionServiceHelperImpl implements RegionServiceHelper {
 
     private final RegionDaoServiceExporter daoServiceExporter;
     private final RegionApiMapper mapper;
@@ -31,7 +31,7 @@ public class RegionApiServiceImpl implements RegionApiService {
      * @param mapper The mapper that converts between DAO entities and API models
      */
     @Autowired
-    public RegionApiServiceImpl(
+    public RegionServiceHelperImpl(
             final RegionDaoServiceExporter daoServiceExporter,
             final RegionApiMapper mapper
     ) {

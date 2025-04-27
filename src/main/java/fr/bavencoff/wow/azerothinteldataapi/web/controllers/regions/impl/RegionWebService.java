@@ -1,6 +1,6 @@
 package fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.impl;
 
-import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.impl.RegionApiService;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.impl.RegionServiceHelper;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionResponseDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionsResponseDto;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RegionWebService {
 
-    private final RegionApiService serviceExporter;
+    private final RegionServiceHelper serviceExporter;
     private final RegionWebMapper mapper;
 
     /**
@@ -34,7 +34,7 @@ public class RegionWebService {
      */
     @Autowired
     public RegionWebService(
-            final RegionApiService serviceExporter,
+            final RegionServiceHelper serviceExporter,
             final RegionWebMapper mapper
     ) {
         this.serviceExporter = serviceExporter;

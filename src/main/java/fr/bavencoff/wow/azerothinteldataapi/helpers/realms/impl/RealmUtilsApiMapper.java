@@ -1,10 +1,10 @@
 package fr.bavencoff.wow.azerothinteldataapi.helpers.realms.impl;
 
-import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl.ParameterApiMapper;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.ConnectedRealmDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.dao.RealmDao;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.ConnectedRealmApi;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.RealmApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl.ParameterApiMapper;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.ConnectedRealmBo;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.RealmBo;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.impl.RegionApiMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -21,21 +21,21 @@ import java.util.List;
         }
 )
 public interface RealmUtilsApiMapper {
-    List<RealmApi> daosToApis(List<RealmDao> daos);
+    List<RealmBo> daosToApis(List<RealmDao> daos);
 
     @Mapping(target = "connectedRealm", qualifiedByName = "withoutRealms")
-    RealmApi daoToApi(RealmDao dao);
+    RealmBo daoToApi(RealmDao dao);
 
     @Mapping(target = "connectedRealm", ignore = true)
     @Named("withoutConnectedRealm")
-    RealmApi daoToApiWithoutCr(RealmDao dao);
+    RealmBo daoToApiWithoutCr(RealmDao dao);
 
 
-    List<ConnectedRealmApi> crDaosToApis(List<ConnectedRealmDao> daos);
+    List<ConnectedRealmBo> crDaosToApis(List<ConnectedRealmDao> daos);
     @Mapping(target = "realms", qualifiedByName = "withoutConnectedRealm")
-    ConnectedRealmApi daoToApi(ConnectedRealmDao dao);
+    ConnectedRealmBo daoToApi(ConnectedRealmDao dao);
 
     @Mapping(target = "realms", ignore = true)
     @Named("withoutRealms")
-    ConnectedRealmApi daoToApiWithoutRealm(ConnectedRealmDao dao);
+    ConnectedRealmBo daoToApiWithoutRealm(ConnectedRealmDao dao);
 }

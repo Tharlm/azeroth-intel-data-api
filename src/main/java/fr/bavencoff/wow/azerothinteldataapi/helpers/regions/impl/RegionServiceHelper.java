@@ -12,7 +12,7 @@ import java.util.List;
  * and provides it to the web layer in the form of RegionApi objects. It acts as an intermediary
  * between the web services and the data access layer.
  */
-public interface RegionApiService {
+public interface RegionServiceHelper {
 
     /**
      * Retrieves a specific region by its ID.

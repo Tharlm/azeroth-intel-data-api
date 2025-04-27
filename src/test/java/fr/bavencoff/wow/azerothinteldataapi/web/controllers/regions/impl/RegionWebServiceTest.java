@@ -1,7 +1,7 @@
 package fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.impl;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.impl.RegionApiService;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.impl.RegionServiceHelper;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionApi;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionResponseDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionsResponseDto;
@@ -39,7 +39,7 @@ import static org.mockito.Mockito.when;
 class RegionWebServiceTest {
 
     @Mock
-    private RegionApiService regionApiService;
+    private RegionServiceHelper regionServiceHelper;
 
     @Mock
     private RegionWebMapper regionWebMapper;
@@ -67,7 +67,7 @@ class RegionWebServiceTest {
         expectedDto.setName("North America");
         expectedDto.setTag(GlobalRegion.US);
 
-        when(regionApiService.getRegion(regionId)).thenReturn(regionApi);
+        when(regionServiceHelper.getRegion(regionId)).thenReturn(regionApi);
         when(regionWebMapper.apiToDto(regionApi)).thenReturn(expectedDto);
 
         // Act
@@ -79,7 +79,7 @@ class RegionWebServiceTest {
         assertEquals("North America", result.getName());
         assertEquals(GlobalRegion.US, result.getTag());
 
-        verify(regionApiService, times(1)).getRegion(regionId);
+        verify(regionServiceHelper, times(1)).getRegion(regionId);
         verify(regionWebMapper, times(1)).apiToDto(regionApi);
     }
 
@@ -88,11 +88,11 @@ class RegionWebServiceTest {
     void getRegion_ShouldPropagateExceptions_WhenApiServiceThrows() {
         // Arrange
         Short regionId = 999;
-        when(regionApiService.getRegion(regionId)).thenThrow(new RegionNotFoundResponseException(regionId));
+        when(regionServiceHelper.getRegion(regionId)).thenThrow(new RegionNotFoundResponseException(regionId));
 
         // Act & Assert
         assertThrows(RegionNotFoundResponseException.class, () -> regionWebService.getRegion(regionId));
-        verify(regionApiService, times(1)).getRegion(regionId);
+        verify(regionServiceHelper, times(1)).getRegion(regionId);
         verify(regionWebMapper, never()).apiToDto(any());
     }
 
@@ -127,7 +127,7 @@ class RegionWebServiceTest {
         GetRegionsResponseDto expectedDto = new GetRegionsResponseDto();
         expectedDto.setRegions(resultDtos);
 
-        when(regionApiService.getRegions()).thenReturn(regionApis);
+        when(regionServiceHelper.getRegions()).thenReturn(regionApis);
         when(regionWebMapper.apisToDtos(regionApis)).thenReturn(expectedDto);
 
         // Act
@@ -144,7 +144,7 @@ class RegionWebServiceTest {
         assertEquals("Europe", result.getRegions().get(1).getName());
         assertEquals("EU", result.getRegions().get(1).getTag());
 
-        verify(regionApiService, times(1)).getRegions();
+        verify(regionServiceHelper, times(1)).getRegions();
         verify(regionWebMapper, times(1)).apisToDtos(regionApis);
     }
 
@@ -156,7 +156,7 @@ class RegionWebServiceTest {
         GetRegionsResponseDto emptyDto = new GetRegionsResponseDto();
         emptyDto.setRegions(Collections.emptyList());
 
-        when(regionApiService.getRegions()).thenReturn(emptyList);
+        when(regionServiceHelper.getRegions()).thenReturn(emptyList);
         when(regionWebMapper.apisToDtos(emptyList)).thenReturn(emptyDto);
 
         // Act
@@ -167,7 +167,7 @@ class RegionWebServiceTest {
         assertNotNull(result.getRegions());
         assertTrue(result.getRegions().isEmpty());
 
-        verify(regionApiService, times(1)).getRegions();
+        verify(regionServiceHelper, times(1)).getRegions();
         verify(regionWebMapper, times(1)).apisToDtos(emptyList);
     }
 }

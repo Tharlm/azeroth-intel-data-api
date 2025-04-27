@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ConnectedRealmServiceExporter {
+public class ConnectedRealmDaoServiceExporter {
 
     private final ConnectedRealmDaoRepository repository;
 
     @Autowired
-    public ConnectedRealmServiceExporter(final ConnectedRealmDaoRepository repository) {
+    public ConnectedRealmDaoServiceExporter(final ConnectedRealmDaoRepository repository) {
         this.repository = repository;
     }
 

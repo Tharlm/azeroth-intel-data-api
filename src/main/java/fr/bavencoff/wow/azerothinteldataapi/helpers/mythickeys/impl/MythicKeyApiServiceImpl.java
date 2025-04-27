@@ -3,7 +3,7 @@ package fr.bavencoff.wow.azerothinteldataapi.helpers.mythickeys.impl;
 import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.mythicseason.MkSeasonAlreadyExistsException;
 import fr.bavencoff.wow.azerothinteldataapi.common.utils.NumberUtils;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.ConnectedRealmDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl.ConnectedRealmServiceExporter;
+import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl.ConnectedRealmDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.mkdungeon.dao.MkDungeon;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.mkdungeon.impl.MkDungeonServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.mkleaderboard.dao.MkLeaderboard;
@@ -36,7 +36,7 @@ public class MythicKeyApiServiceImpl implements MythicKeysApiService {
     private final MkSeasonServiceExporter mkSeasonServiceExporter;
     private final RegionDaoServiceExporter regionsServiceExporter;
     private final MkPeriodServiceExporter mkPeriodServiceExporter;
-    private final ConnectedRealmServiceExporter connectedRealmServiceExporter;
+    private final ConnectedRealmDaoServiceExporter connectedRealmDaoServiceExporter;
     private final MkDungeonServiceExporter mkDungeonServiceExporter;
     private final MkLeaderboardServiceExporter leaderboardServiceExporter;
     private final MkLeaderboardServiceExporter mkLeaderboardServiceExporter;
@@ -49,7 +49,7 @@ public class MythicKeyApiServiceImpl implements MythicKeysApiService {
             final MkSeasonServiceExporter mkSeasonServiceExporter,
             final RegionDaoServiceExporter regionsServiceExporter,
             final MkPeriodServiceExporter mkPeriodServiceExporter,
-            final ConnectedRealmServiceExporter connectedRealmServiceExporter,
+            final ConnectedRealmDaoServiceExporter connectedRealmDaoServiceExporter,
             final MkDungeonServiceExporter mkDungeonServiceExporter,
             final MkLeaderboardServiceExporter leaderboardServiceExporter,
             final MkLeaderboardServiceExporter mkLeaderboardServiceExporter,
@@ -60,7 +60,7 @@ public class MythicKeyApiServiceImpl implements MythicKeysApiService {
         this.mkSeasonServiceExporter = mkSeasonServiceExporter;
         this.regionsServiceExporter = regionsServiceExporter;
         this.mkPeriodServiceExporter = mkPeriodServiceExporter;
-        this.connectedRealmServiceExporter = connectedRealmServiceExporter;
+        this.connectedRealmDaoServiceExporter = connectedRealmDaoServiceExporter;
         this.mkDungeonServiceExporter = mkDungeonServiceExporter;
         this.leaderboardServiceExporter = leaderboardServiceExporter;
         this.mkLeaderboardServiceExporter = mkLeaderboardServiceExporter;
@@ -220,7 +220,7 @@ public class MythicKeyApiServiceImpl implements MythicKeysApiService {
         RegionDao region = this.regionsServiceExporter.findById(idRegion);
         MkPeriod mkPeriod = this.mkPeriodServiceExporter.findByRegionAndIdMkPeriod(region, idMkPeriod);
         MkDungeon mkDungeon = this.mkDungeonServiceExporter.findById(idMkDungeon);
-        ConnectedRealmDao connectedRealm = this.connectedRealmServiceExporter.findById(idConnectedRealm);
+        ConnectedRealmDao connectedRealm = this.connectedRealmDaoServiceExporter.findById(idConnectedRealm);
 
         log.debug("Recuperation du mkLeaderboard");
         final Optional<MkLeaderboard> byNaturalId = this.leaderboardServiceExporter.findOptionalByNaturalId(mkDungeon, mkPeriod, region, connectedRealm);

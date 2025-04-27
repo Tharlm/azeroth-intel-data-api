@@ -102,11 +102,11 @@ public class PlayableApiServiceImpl implements PlayableClassApiService, Playable
             ParameterTypeDao factionParam = this.parameterTypeServiceExporter.getParameterType(
                     KeyParameterType.PRF,
                     information.getFaction().getType(),
-                    information.getFaction().getLabel()
+                    information.getFaction().getName()
             );
             playableRaceDao.setFaction(factionParam);
         } else {
-            playableRaceDao.getFaction().setName(information.getFaction().getLabel());
+            playableRaceDao.getFaction().setName(information.getFaction().getName());
         }
 
         // pour chaque PC fournies
