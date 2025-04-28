@@ -1,0 +1,2161 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1745863066945-1
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_pk
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_item
+                  type: BIGINT
+              - column:
+                  name: id_pet_breed
+                  type: INTEGER
+              - column:
+                  name: nb_pet_level
+                  type: SMALLINT
+              - column:
+                  name: id_pet_quality
+                  type: SMALLINT
+              - column:
+                  name: id_pet_species
+                  type: SMALLINT
+              - column:
+                  name: nb_bid
+                  type: BIGINT
+              - column:
+                  name: nb_buyout
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_timeleft
+                  type: VARCHAR(15)
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+                  name: bo_deleted
+                  remarks: indique si la ligne existe encore dans l'API Blizzard
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_imported
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_updated
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_connected_realm
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nb_quantity
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_pk
+                  name: id_region
+                  type: SMALLINT
+              - column:
+                  name: bo_sold
+                  remarks: Check if the auction is sold or finishedd without being sold
+                  type: BOOLEAN
+            tableName: tb_auction_house
+  - changeSet:
+      id: 1745863066945-2
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_connected_realm_pk
+                  name: id
+                  type: INTEGER
+              - column:
+                  name: bo_queue
+                  remarks: indique s'il y a une file d'attente pour se connecter au serveur
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_param_population
+                  remarks: Population du serveur
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_param_status
+                  remarks: Statut du serveur
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: true
+                  name: bo_active
+                  remarks: realm is active or not
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_last_update
+                  remarks: Date last update
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_region
+                  remarks: Identifiant de la région
+                  type: SMALLINT
+            remarks: Table des Connected Realm
+            tableName: tb_connected_realm
+  - changeSet:
+      id: 1745863066945-3
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_realm_pk
+                  name: id
+                  remarks: id du serveur
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_region
+                  remarks: id de la region liée
+                  type: SMALLINT
+              - column:
+                  name: lb_name
+                  remarks: Nom du serveur
+                  type: VARCHAR(50)
+              - column:
+                  name: lb_category
+                  remarks: Catégorie du serveur
+                  type: VARCHAR(30)
+              - column:
+                  name: lb_locale
+                  type: VARCHAR(10)
+              - column:
+                  name: lb_timezone
+                  type: VARCHAR(25)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_slug
+                  type: VARCHAR(50)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bo_tournament
+                  type: BOOLEAN
+              - column:
+                  name: id_param
+                  remarks: ID param reference type
+                  type: INTEGER
+              - column:
+                  name: id_connected_realm
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_last_update
+                  remarks: Date last update
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: true
+                  name: bo_active
+                  remarks: active
+                  type: BOOLEAN
+            remarks: Table des serveurs
+            tableName: tb_realm
+  - changeSet:
+      id: 1745863066945-4
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_playable_race_pk
+                  name: id
+                  remarks: ID race
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_name
+                  remarks: Nom race
+                  type: VARCHAR(50)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_type_faction
+                  remarks: Faction
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bo_selectable
+                  remarks: Selectionnable
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bo_allied_race
+                  remarks: Race alliée
+                  type: BOOLEAN
+            remarks: Table des races disponibles
+            tableName: tb_playable_race
+  - changeSet:
+      id: 1745863066945-5
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: lk_race_class_pk
+                  name: id_race
+                  remarks: ID race
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: lk_race_class_pk
+                  name: id_class
+                  remarks: ID classe
+                  type: INTEGER
+            remarks: Table link race and class
+            tableName: lk_race_class
+  - changeSet:
+      id: 1745863066945-6
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_mk_season_pk
+                  name: id_tec_mk_season
+                  remarks: ID interne
+                  startWith: 57
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_region
+                  type: SMALLINT
+              - column:
+                  name: ts_start_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: ts_end_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: lb_name
+                  type: VARCHAR(50)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_mk_season
+                  remarks: ID mk season blizzard
+                  type: INTEGER
+            tableName: tb_mk_season
+  - changeSet:
+      id: 1745863066945-7
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_mk_period_pk
+                  name: id_tec_mk_period
+                  remarks: ID interne
+                  startWith: 1716
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_region
+                  type: SMALLINT
+              - column:
+                  name: ts_start_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: ts_end_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_mk_period
+                  remarks: ID de l'API blizzard
+                  type: INTEGER
+            tableName: tb_mk_period
+  - changeSet:
+      id: 1745863066945-8
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_mk_leaderboard_pkey
+                  name: id_tec_mk_leaderboard
+                  startWith: 5693
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_mk_dungeon
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_mk_period
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_connected_realm
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_region
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_keystone_affixe_1
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: start_level_affixe_1
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_keystone_affixe_2
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: start_level_affixe_2
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_keystone_affixe_3
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: start_level_affixe_3
+                  type: INTEGER
+            tableName: tb_mk_leaderboard
+  - changeSet:
+      id: 1745863066945-9
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_mk_leaderboard_group_pk
+                  incrementBy: 500
+                  name: id_tec_mk_leaderboard_group
+                  startWith: 1762002
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_mk_leaderboard
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: duration
+                  remarks: durée du donjon en seconde
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: ranking
+                  remarks: rang du group pour la période, pour le donjon, pour le connected
+                    realm
+                  type: INTEGER
+              - column:
+                  name: dt_completed
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: key_level
+                  type: INTEGER
+            tableName: tb_mk_leaderboard_group
+  - changeSet:
+      id: 1745863066945-10
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_mk_leaderboard_members_pk
+                  incrementBy: 2500
+                  name: id_tec_mk_leaderboard_members
+                  startWith: 8799344
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_mk_leaderboard_group
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_player
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_name_player
+                  type: VARCHAR(12)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_realm
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_faction
+                  type: VARCHAR(1)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_specialization
+                  type: INTEGER
+            tableName: tb_mk_leaderboard_members
+  - changeSet:
+      id: 1745863066945-11
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: lk_mk_season_period_pk
+                  name: id_tec_mk_season
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: lk_mk_season_period_pk
+                  name: id_tec_mk_period
+                  type: INTEGER
+            tableName: lk_mk_season_period
+  - changeSet:
+      id: 1745863066945-12
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_parameter_type_pk
+                  name: id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_key
+                  remarks: Enum représentant à quel ensemble le type/name appartient
+                  type: VARCHAR(3)
+              - column:
+                  name: lb_name
+                  remarks: Default name
+                  type: VARCHAR(50)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_type
+                  remarks: Type provenant de l'API Blizzard
+                  type: VARCHAR(50)
+            remarks: table pour les parametres type/name
+            tableName: tb_parameter_type
+  - changeSet:
+      id: 1745863066945-13
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_region_pk
+                  name: id
+                  remarks: id région
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_name
+                  remarks: nom région
+                  type: VARCHAR(50)
+              - column:
+                  name: lb_tag
+                  remarks: tag
+                  type: VARCHAR(10)
+            remarks: Liste des regions
+            tableName: tb_region
+  - changeSet:
+      id: 1745863066945-14
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_item_subclass_pk
+                  name: id
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_display_name
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_item_subclass_pk
+                  name: id_class
+                  type: SMALLINT
+              - column:
+                  name: lb_verbose_name
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+                  name: bo_hide_subclass_in_tooltips
+                  type: BOOLEAN
+            tableName: tb_item_subclass
+  - changeSet:
+      id: 1745863066945-15
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_item_pk
+                  name: id
+                  remarks: ID de l'item
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_name
+                  type: VARCHAR(100)
+              - column:
+                  name: id_param_quality
+                  type: INTEGER
+              - column:
+                  name: nb_level
+                  type: SMALLINT
+              - column:
+                  name: nb_required_level
+                  type: SMALLINT
+              - column:
+                  name: id_item_class
+                  type: SMALLINT
+              - column:
+                  name: id_item_subclass
+                  type: SMALLINT
+              - column:
+                  name: id_param_inventory
+                  type: INTEGER
+              - column:
+                  name: nb_purchase_price
+                  type: INTEGER
+              - column:
+                  name: nb_sell_price
+                  type: INTEGER
+              - column:
+                  name: nb_max_count
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+                  name: bo_equippable
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+                  name: bo_stackable
+                  type: BOOLEAN
+              - column:
+                  name: nb_purchase_quantity
+                  type: SMALLINT
+            tableName: tb_item
+  - changeSet:
+      id: 1745863066945-16
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_item
+            indexName: tb_auction_house_id_item_index
+            tableName: tb_auction_house
+  - changeSet:
+      id: 1745863066945-17
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_connected_realm
+            indexName: tb_auction_house_id_connected_realm_index
+            tableName: tb_auction_house
+  - changeSet:
+      id: 1745863066945-18
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_region_1_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_item
+                  type: BIGINT
+              - column:
+                  name: id_pet_breed
+                  type: INTEGER
+              - column:
+                  name: nb_pet_level
+                  type: SMALLINT
+              - column:
+                  name: id_pet_quality
+                  type: SMALLINT
+              - column:
+                  name: id_pet_species
+                  type: SMALLINT
+              - column:
+                  name: nb_bid
+                  type: BIGINT
+              - column:
+                  name: nb_buyout
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_timeleft
+                  type: VARCHAR(15)
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+                  name: bo_deleted
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_imported
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_updated
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_connected_realm
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nb_quantity
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_region_1_pkey
+                  name: id_region
+                  type: SMALLINT
+              - column:
+                  name: bo_sold
+                  type: BOOLEAN
+            tableName: tb_auction_house_region_1
+  - changeSet:
+      id: 1745863066945-19
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_region_2_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_item
+                  type: BIGINT
+              - column:
+                  name: id_pet_breed
+                  type: INTEGER
+              - column:
+                  name: nb_pet_level
+                  type: SMALLINT
+              - column:
+                  name: id_pet_quality
+                  type: SMALLINT
+              - column:
+                  name: id_pet_species
+                  type: SMALLINT
+              - column:
+                  name: nb_bid
+                  type: BIGINT
+              - column:
+                  name: nb_buyout
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_timeleft
+                  type: VARCHAR(15)
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+                  name: bo_deleted
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_imported
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_updated
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_connected_realm
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nb_quantity
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_region_2_pkey
+                  name: id_region
+                  type: SMALLINT
+              - column:
+                  name: bo_sold
+                  type: BOOLEAN
+            tableName: tb_auction_house_region_2
+  - changeSet:
+      id: 1745863066945-20
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_region_3_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_item
+                  type: BIGINT
+              - column:
+                  name: id_pet_breed
+                  type: INTEGER
+              - column:
+                  name: nb_pet_level
+                  type: SMALLINT
+              - column:
+                  name: id_pet_quality
+                  type: SMALLINT
+              - column:
+                  name: id_pet_species
+                  type: SMALLINT
+              - column:
+                  name: nb_bid
+                  type: BIGINT
+              - column:
+                  name: nb_buyout
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_timeleft
+                  type: VARCHAR(15)
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+                  name: bo_deleted
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_imported
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_updated
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_connected_realm
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nb_quantity
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_region_3_pkey
+                  name: id_region
+                  type: SMALLINT
+              - column:
+                  name: bo_sold
+                  type: BOOLEAN
+            tableName: tb_auction_house_region_3
+  - changeSet:
+      id: 1745863066945-21
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_region_4_pkey
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_item
+                  type: BIGINT
+              - column:
+                  name: id_pet_breed
+                  type: INTEGER
+              - column:
+                  name: nb_pet_level
+                  type: SMALLINT
+              - column:
+                  name: id_pet_quality
+                  type: SMALLINT
+              - column:
+                  name: id_pet_species
+                  type: SMALLINT
+              - column:
+                  name: nb_bid
+                  type: BIGINT
+              - column:
+                  name: nb_buyout
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_timeleft
+                  type: VARCHAR(15)
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+                  name: bo_deleted
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_imported
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_updated
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_connected_realm
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nb_quantity
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_auction_house_region_4_pkey
+                  name: id_region
+                  type: SMALLINT
+              - column:
+                  name: bo_sold
+                  type: BOOLEAN
+            tableName: tb_auction_house_region_4
+  - changeSet:
+      id: 1745863066945-22
+      author: patri (generated)
+      changes:
+        - createView:
+            fullDefinition: false
+            selectQuery: |-
+              SELECT r.id,
+                  r.lb_name AS realm_name,
+                  r.lb_category AS realm_category,
+                  r.lb_locale AS realm_locale,
+                  r.lb_timezone AS realm_timezone,
+                  r.lb_slug AS realm_slug,
+                  r.bo_tournament,
+                  r.id_param AS realm_id_type,
+                  pt_type.lb_key AS realm_type_key,
+                  pt_type.lb_name AS realm_type_name,
+                  pt_type.lb_type AS realm_type_type,
+                  cr.id AS connected_realm_id,
+                  cr.bo_queue,
+                  cr.id_param_population,
+                  pt_population.lb_key AS population_key,
+                  pt_population.lb_name AS population_name,
+                  pt_population.lb_type AS population_type,
+                  cr.id_param_status,
+                  pt_status.lb_key AS status_key,
+                  pt_status.lb_name AS status_name,
+                  pt_status.lb_type AS status_type,
+                  r.id_region,
+                  region.lb_name AS region_name,
+                  region.lb_tag AS region_tag
+                 FROM (((((tb_realm r
+                   LEFT JOIN tb_connected_realm cr ON ((r.id_connected_realm = cr.id)))
+                   LEFT JOIN tb_parameter_type pt_population ON ((cr.id_param_population = pt_population.id)))
+                   LEFT JOIN tb_parameter_type pt_status ON ((cr.id_param_status = pt_status.id)))
+                   LEFT JOIN tb_parameter_type pt_type ON ((r.id_param = pt_type.id)))
+                   LEFT JOIN tb_region region ON ((r.id_region = region.id)));
+            viewName: vw_realms
+  - changeSet:
+      id: 1745863066945-23
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: lb_slug
+              - column:
+                  name: id_region
+            indexName: tb_realm_lb_slug_id_region_uindex
+            tableName: tb_realm
+            unique: true
+  - changeSet:
+      id: 1745863066945-24
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_class
+              - column:
+                  name: id_race
+            indexName: lk_race_class_id_class_id_race_uindex
+            tableName: lk_race_class
+            unique: true
+  - changeSet:
+      id: 1745863066945-25
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_region
+              - column:
+                  name: id_mk_season
+            indexName: tb_mk_season_id_region_id_mk_season_uindex
+            tableName: tb_mk_season
+            unique: true
+  - changeSet:
+      id: 1745863066945-26
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_region
+              - column:
+                  name: id_mk_period
+            indexName: tb_mk_period_id_region_id_mk_period_uindex
+            tableName: tb_mk_period
+            unique: true
+  - changeSet:
+      id: 1745863066945-27
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_mk_period
+              - column:
+                  name: id_mk_dungeon
+              - column:
+                  name: id_connected_realm
+            indexName: tb_mk_leaderboard_id_mk_period_id_mk_dungeon_id_connected_realm
+            tableName: tb_mk_leaderboard
+            unique: true
+  - changeSet:
+      id: 1745863066945-28
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: ranking
+            indexName: tb_mk_leaderboard_group_ranking_index
+            tableName: tb_mk_leaderboard_group
+  - changeSet:
+      id: 1745863066945-29
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_mk_leaderboard
+            indexName: tb_mk_leaderboard_group_id_mk_leaderboard_index
+            tableName: tb_mk_leaderboard_group
+  - changeSet:
+      id: 1745863066945-30
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_mk_leaderboard_group
+            indexName: tb_mk_leaderboard_members_id_mk_leaderboard_group_index
+            tableName: tb_mk_leaderboard_members
+  - changeSet:
+      id: 1745863066945-31
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: lb_type
+              - column:
+                  name: lb_key
+            indexName: tb_parameter_type_lb_type_lb_key_uindex
+            tableName: tb_parameter_type
+            unique: true
+  - changeSet:
+      id: 1745863066945-32
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_commodities_pk
+                  name: id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nb_quantity
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: nb_unit_price
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_item
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_timeleft
+                  type: AUCTION_TIMELEFT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_region
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueBoolean: false
+                  name: bo_deleted
+                  remarks: Indique si la ligne existe toujours dans l'API Blizzard
+                  type: BOOLEAN
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_imported
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: dt_updated
+                  type: TIMESTAMP WITHOUT TIME ZONE
+            tableName: tb_commodities
+  - changeSet:
+      id: 1745863066945-33
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_item
+            indexName: tb_auction_house_region_1_id_item_idx
+            tableName: tb_auction_house_region_1
+  - changeSet:
+      id: 1745863066945-34
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_connected_realm
+            indexName: tb_auction_house_region_1_id_connected_realm_idx
+            tableName: tb_auction_house_region_1
+  - changeSet:
+      id: 1745863066945-35
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_item
+            indexName: tb_auction_house_region_2_id_item_idx
+            tableName: tb_auction_house_region_2
+  - changeSet:
+      id: 1745863066945-36
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_connected_realm
+            indexName: tb_auction_house_region_2_id_connected_realm_idx
+            tableName: tb_auction_house_region_2
+  - changeSet:
+      id: 1745863066945-37
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_item
+            indexName: tb_auction_house_region_3_id_item_idx
+            tableName: tb_auction_house_region_3
+  - changeSet:
+      id: 1745863066945-38
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_connected_realm
+            indexName: tb_auction_house_region_3_id_connected_realm_idx
+            tableName: tb_auction_house_region_3
+  - changeSet:
+      id: 1745863066945-39
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_item
+            indexName: tb_auction_house_region_4_id_item_idx
+            tableName: tb_auction_house_region_4
+  - changeSet:
+      id: 1745863066945-40
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_connected_realm
+            indexName: tb_auction_house_region_4_id_connected_realm_idx
+            tableName: tb_auction_house_region_4
+  - changeSet:
+      id: 1745863066945-41
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_region
+            indexName: tb_commodities_id_region_index
+            tableName: tb_commodities
+  - changeSet:
+      id: 1745863066945-42
+      author: patri (generated)
+      changes:
+        - createIndex:
+            columns:
+              - column:
+                  name: id_item
+            indexName: tb_commodities_id_item_index
+            tableName: tb_commodities
+  - changeSet:
+      id: 1745863066945-43
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: lk_mk_season_mk_dungeon_pk
+                  name: id_mk_season
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: lk_mk_season_mk_dungeon_pk
+                  name: id_mk_dungeon
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: lk_mk_season_mk_dungeon_pk
+                  name: id_region
+                  type: SMALLINT
+            tableName: lk_mk_season_mk_dungeon
+  - changeSet:
+      id: 1745863066945-44
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_achievement_pk
+                  name: id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_achievement_category
+                  type: INTEGER
+              - column:
+                  name: lb_name
+                  type: VARCHAR(100)
+              - column:
+                  name: lb_description
+                  type: VARCHAR(500)
+              - column:
+                  name: nb_points
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bo_account_wide
+                  type: BOOLEAN
+              - column:
+                  name: id_previous_achievement
+                  type: INTEGER
+              - column:
+                  name: nb_display_order
+                  type: INTEGER
+              - column:
+                  name: lb_reward_description
+                  type: VARCHAR(500)
+            tableName: tb_achievement
+  - changeSet:
+      id: 1745863066945-45
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_achievement_category_pk
+                  name: id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(100)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bo_guild_category
+                  type: BOOLEAN
+              - column:
+                  name: nb_display_order
+                  type: INTEGER
+              - column:
+                  name: id_parent_category
+                  type: INTEGER
+              - column:
+                  name: nb_qtt_alliance
+                  type: INTEGER
+              - column:
+                  name: nb_point_alliance
+                  type: INTEGER
+              - column:
+                  name: nb_qtt_horde
+                  type: INTEGER
+              - column:
+                  name: nb_point_horde
+                  type: INTEGER
+            tableName: tb_achievement_category
+  - changeSet:
+      id: 1745863066945-46
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_item_class_pk
+                  name: id
+                  type: SMALLINT
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_name
+                  type: VARCHAR(100)
+            tableName: tb_item_class
+  - changeSet:
+      id: 1745863066945-47
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_mk_dungeon_pk
+                  name: id
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: id_dungeon
+                  type: INTEGER
+              - column:
+                  name: lb_name
+                  type: VARCHAR(50)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: bo_tracked
+                  type: BOOLEAN
+            tableName: tb_mk_dungeon
+  - changeSet:
+      id: 1745863066945-48
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_playable_class_pk
+                  name: id
+                  remarks: ID classe
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: lb_name
+                  remarks: Nom classe
+                  type: VARCHAR(50)
+              - column:
+                  name: id_power_type
+                  remarks: ID power type
+                  type: INTEGER
+            remarks: Classe
+            tableName: tb_playable_class
+  - changeSet:
+      id: 1745863066945-49
+      author: patri (generated)
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: tb_playable_specialization_pk
+                  name: id
+                  remarks: ID spe
+                  type: INTEGER
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  remarks: Nom spe
+                  type: VARCHAR(50)
+              - column:
+                  name: id_playable_class
+                  remarks: ID classe associée
+                  type: INTEGER
+              - column:
+                  name: id_type_role
+                  remarks: Role parameter
+                  type: INTEGER
+              - column:
+                  name: id_type_primary_stat
+                  remarks: ID type stats première
+                  type: INTEGER
+            remarks: Table des spés jouables
+            tableName: tb_playable_specialization
+  - changeSet:
+      id: 1745863066945-50
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_mk_dungeon
+            baseTableName: lk_mk_season_mk_dungeon
+            constraintName: lk_mk_season_mk_dungeon_tb_mk_dungeon_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_mk_dungeon
+            validate: true
+  - changeSet:
+      id: 1745863066945-51
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_mk_season,id_region
+            baseTableName: lk_mk_season_mk_dungeon
+            constraintName: lk_mk_season_mk_dungeon_tb_mk_season_id_mk_season_id_region_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id_mk_season,id_region
+            referencedTableName: tb_mk_season
+            validate: true
+  - changeSet:
+      id: 1745863066945-52
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_tec_mk_period
+            baseTableName: lk_mk_season_period
+            constraintName: lk_mk_season_period_tb_mk_period_id_tec_mk_period_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id_tec_mk_period
+            referencedTableName: tb_mk_period
+            validate: true
+  - changeSet:
+      id: 1745863066945-53
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_tec_mk_season
+            baseTableName: lk_mk_season_period
+            constraintName: lk_mk_season_period_tb_mk_season_id_tec_mk_season_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id_tec_mk_season
+            referencedTableName: tb_mk_season
+            validate: true
+  - changeSet:
+      id: 1745863066945-54
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_class
+            baseTableName: lk_race_class
+            constraintName: lk_race_class_tb_playable_class_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_playable_class
+            validate: true
+  - changeSet:
+      id: 1745863066945-55
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_race
+            baseTableName: lk_race_class
+            constraintName: lk_race_class_tb_playable_race_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_playable_race
+            validate: true
+  - changeSet:
+      id: 1745863066945-56
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_parent_category
+            baseTableName: tb_achievement_category
+            constraintName: tb_achievement_category_tb_achievement_category_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_achievement_category
+            validate: true
+  - changeSet:
+      id: 1745863066945-57
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_achievement_category
+            baseTableName: tb_achievement
+            constraintName: tb_achievement_tb_achievement_category_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_achievement_category
+            validate: true
+  - changeSet:
+      id: 1745863066945-58
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_connected_realm
+            baseTableName: tb_auction_house
+            constraintName: tb_auction_house_tb_connected_realm_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_connected_realm
+            validate: true
+  - changeSet:
+      id: 1745863066945-59
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_connected_realm
+            baseTableName: tb_auction_house_region_1
+            constraintName: tb_auction_house_tb_connected_realm_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_connected_realm
+            validate: true
+  - changeSet:
+      id: 1745863066945-60
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_connected_realm
+            baseTableName: tb_auction_house_region_2
+            constraintName: tb_auction_house_tb_connected_realm_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_connected_realm
+            validate: true
+  - changeSet:
+      id: 1745863066945-61
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_connected_realm
+            baseTableName: tb_auction_house_region_3
+            constraintName: tb_auction_house_tb_connected_realm_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_connected_realm
+            validate: true
+  - changeSet:
+      id: 1745863066945-62
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_connected_realm
+            baseTableName: tb_auction_house_region_4
+            constraintName: tb_auction_house_tb_connected_realm_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_connected_realm
+            validate: true
+  - changeSet:
+      id: 1745863066945-63
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_auction_house
+            constraintName: tb_auction_house_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-64
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_auction_house_region_1
+            constraintName: tb_auction_house_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-65
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_auction_house_region_2
+            constraintName: tb_auction_house_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-66
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_auction_house_region_3
+            constraintName: tb_auction_house_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-67
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_auction_house_region_4
+            constraintName: tb_auction_house_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-68
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_commodities
+            constraintName: tb_commodities_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-69
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_param_population
+            baseTableName: tb_connected_realm
+            constraintName: tb_connected_realm_tb_parameter_type_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_parameter_type
+            validate: true
+  - changeSet:
+      id: 1745863066945-70
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_param_status
+            baseTableName: tb_connected_realm
+            constraintName: tb_connected_realm_tb_parameter_type_id_fk2
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_parameter_type
+            validate: true
+  - changeSet:
+      id: 1745863066945-71
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_connected_realm
+            constraintName: tb_connected_realm_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-72
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_class
+            baseTableName: tb_item_subclass
+            constraintName: tb_item_subclass_tb_item_class_on_id
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_item_class
+            validate: true
+  - changeSet:
+      id: 1745863066945-73
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_item_class
+            baseTableName: tb_item
+            constraintName: tb_item_tb_item_class_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_item_class
+            validate: true
+  - changeSet:
+      id: 1745863066945-74
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_item_class,id_item_subclass
+            baseTableName: tb_item
+            constraintName: tb_item_tb_item_subclass_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id_class,id
+            referencedTableName: tb_item_subclass
+            validate: true
+  - changeSet:
+      id: 1745863066945-75
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_param_inventory
+            baseTableName: tb_item
+            constraintName: tb_item_tb_parameter_type_id_inventory_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_parameter_type
+            validate: true
+  - changeSet:
+      id: 1745863066945-76
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_param_quality
+            baseTableName: tb_item
+            constraintName: tb_item_tb_parameter_type_id_quality_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_parameter_type
+            validate: true
+  - changeSet:
+      id: 1745863066945-77
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_mk_leaderboard
+            baseTableName: tb_mk_leaderboard_group
+            constraintName: tb_mk_leaderboard_group_tb_mk_leaderboard_id_tec_mk_leaderboard
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: NO ACTION
+            referencedColumnNames: id_tec_mk_leaderboard
+            referencedTableName: tb_mk_leaderboard
+            validate: true
+  - changeSet:
+      id: 1745863066945-78
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_mk_leaderboard_group
+            baseTableName: tb_mk_leaderboard_members
+            constraintName: tb_mk_leaderboard_members_tb_mk_leaderboard_group_id_tec_mk_lea
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: NO ACTION
+            referencedColumnNames: id_tec_mk_leaderboard_group
+            referencedTableName: tb_mk_leaderboard_group
+            validate: true
+  - changeSet:
+      id: 1745863066945-79
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_connected_realm
+            baseTableName: tb_mk_leaderboard
+            constraintName: tb_mk_leaderboard_tb_connected_realm_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_connected_realm
+            validate: true
+  - changeSet:
+      id: 1745863066945-80
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_mk_dungeon
+            baseTableName: tb_mk_leaderboard
+            constraintName: tb_mk_leaderboard_tb_mk_dungeon_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_mk_dungeon
+            validate: true
+  - changeSet:
+      id: 1745863066945-81
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_mk_period,id_region
+            baseTableName: tb_mk_leaderboard
+            constraintName: tb_mk_leaderboard_tb_mk_period_id_mk_period_id_region_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id_mk_period,id_region
+            referencedTableName: tb_mk_period
+            validate: true
+  - changeSet:
+      id: 1745863066945-82
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_mk_leaderboard
+            constraintName: tb_mk_leaderboard_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-83
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_mk_period
+            constraintName: tb_mk_period_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-84
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_mk_season
+            constraintName: tb_mk_season_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+  - changeSet:
+      id: 1745863066945-85
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_type_faction
+            baseTableName: tb_playable_race
+            constraintName: tb_playable_race_tb_parameter_type_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_parameter_type
+            validate: true
+  - changeSet:
+      id: 1745863066945-86
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_type_role
+            baseTableName: tb_playable_specialization
+            constraintName: tb_playable_specialization_tb_parameter_type_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_parameter_type
+            validate: true
+  - changeSet:
+      id: 1745863066945-87
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_type_primary_stat
+            baseTableName: tb_playable_specialization
+            constraintName: tb_playable_specialization_tb_parameter_type_id_fk_2
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_parameter_type
+            validate: true
+  - changeSet:
+      id: 1745863066945-88
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_playable_class
+            baseTableName: tb_playable_specialization
+            constraintName: tb_playable_specialization_tb_playable_class_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_playable_class
+            validate: true
+  - changeSet:
+      id: 1745863066945-89
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_connected_realm
+            baseTableName: tb_realm
+            constraintName: tb_realm_tb_connected_realm_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_connected_realm
+            validate: true
+  - changeSet:
+      id: 1745863066945-90
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_param
+            baseTableName: tb_realm
+            constraintName: tb_realm_tb_parameter_type_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_parameter_type
+            validate: true
+  - changeSet:
+      id: 1745863066945-91
+      author: patri (generated)
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: id_region
+            baseTableName: tb_realm
+            constraintName: tb_realm_tb_region_id_fk
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: tb_region
+            validate: true
+

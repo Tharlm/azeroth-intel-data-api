@@ -23,6 +23,10 @@ spring:
         order_updates: true
         order_inserts: true
         batch_versioned_data: true
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.yaml
+    enabled: false
+    default-schema: public
   reactor:
     context-propagation: auto
 
