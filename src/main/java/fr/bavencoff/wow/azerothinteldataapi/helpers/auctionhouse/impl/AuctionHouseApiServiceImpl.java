@@ -36,12 +36,12 @@ public class AuctionHouseApiServiceImpl implements AuctionHouseApiService {
      * The batch size will be noted N
      * <p>
      * First we retrieve N rows from the DB with IDs equals to the new ones.
-     * 2 cases are posssible:
+     * 2 cases are possible:
      * <ul>
      *     <li>the row is present is both DB and API: we update the row in our DB</li>
      *     <li>the row does not exist in our DB: we add this one in our DB</li>
      * </ul>
-     * We repeat the process anytime necessary for processsing of data from api
+     * We repeat the process anytime necessary for processing of data from api
      * <p>
      * Then we delete logically data in our DB that are still active but no more existing in the API
      *

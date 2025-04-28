@@ -138,8 +138,8 @@ class RegionWebServiceTest {
         assertNotNull(result.getRegions());
         assertEquals(2, result.getRegions().size());
         assertEquals((short) 1, result.getRegions().getFirst().getId());
-        assertEquals("North America", result.getRegions().get(0).getName());
-        assertEquals("US", result.getRegions().get(0).getTag());
+        assertEquals("North America", result.getRegions().getFirst().getName());
+        assertEquals("US", result.getRegions().getFirst().getTag());
         assertEquals((short) 3, result.getRegions().get(1).getId());
         assertEquals("Europe", result.getRegions().get(1).getName());
         assertEquals("EU", result.getRegions().get(1).getTag());

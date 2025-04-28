@@ -65,9 +65,7 @@ class RegionDaoServiceExporterIntegrationTest {
         Short nonExistentRegionId = 999;
 
         // Act & Assert
-        assertThrows(RegionNotFoundResponseException.class, () -> {
-            regionDaoServiceExporter.findById(nonExistentRegionId);
-        });
+        assertThrows(RegionNotFoundResponseException.class, () -> regionDaoServiceExporter.findById(nonExistentRegionId));
     }
 
     @Test
@@ -111,8 +109,8 @@ class RegionDaoServiceExporterIntegrationTest {
 
         // Verify first region
         assertEquals((short) 1, result.getFirst().getId());
-        assertEquals("North America", result.get(0).getName());
-        assertEquals(GlobalRegion.US, result.get(0).getTag());
+        assertEquals("North America", result.getFirst().getName());
+        assertEquals(GlobalRegion.US, result.getFirst().getTag());
 
         // Verify second region
         assertEquals((short) 2, result.get(1).getId());

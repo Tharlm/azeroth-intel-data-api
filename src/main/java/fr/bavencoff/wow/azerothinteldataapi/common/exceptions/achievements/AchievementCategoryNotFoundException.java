@@ -5,19 +5,19 @@ import lombok.Getter;
 @Getter
 public class AchievementCategoryNotFoundException extends RuntimeException {
     public static final String MESSAGE = "Achievement Category with id %d does not exists.";
-    private final Integer idAchievementCatergory;
+    private final Integer idAchievementCategory;
 
-    public AchievementCategoryNotFoundException(Integer idAchievementCatergory) {
-        this(idAchievementCatergory, String.format(MESSAGE, idAchievementCatergory));
+    public AchievementCategoryNotFoundException(Integer idAchievementCategory) {
+        this(idAchievementCategory, String.format(MESSAGE, idAchievementCategory));
     }
 
-    public AchievementCategoryNotFoundException(Integer idAchievementCatergory, String message) {
-        this(idAchievementCatergory, message, null);
+    public AchievementCategoryNotFoundException(Integer idAchievementCategory, String message) {
+        this(idAchievementCategory, message, null);
     }
 
-    public AchievementCategoryNotFoundException(Integer idAchievementCatergory, String message, Throwable cause) {
+    public AchievementCategoryNotFoundException(Integer idAchievementCategory, String message, Throwable cause) {
         super(message, cause);
-        this.idAchievementCatergory = idAchievementCatergory;
+        this.idAchievementCategory = idAchievementCategory;
     }
 
 }

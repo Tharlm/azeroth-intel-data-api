@@ -29,7 +29,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for the RegionApiServiceImpl class.
- * 
+ * <p>
  * These tests verify that the service correctly:
  * 1. Delegates calls to the DAO service exporter
  * 2. Maps DAO entities to API models using the mapper
@@ -133,9 +133,9 @@ class RegionServiceHelperImplTest {
         // Assert
         assertNotNull(result);
         assertEquals(2, result.size());
-        assertEquals(1, result.get(0).getId());
-        assertEquals("North America", result.get(0).getName());
-        assertEquals(GlobalRegion.US, result.get(0).getTag());
+        assertEquals(1, result.getFirst().getId());
+        assertEquals("North America", result.getFirst().getName());
+        assertEquals(GlobalRegion.US, result.getFirst().getTag());
         assertEquals(3, result.get(1).getId());
         assertEquals("Europe", result.get(1).getName());
         assertEquals(GlobalRegion.EU, result.get(1).getTag());

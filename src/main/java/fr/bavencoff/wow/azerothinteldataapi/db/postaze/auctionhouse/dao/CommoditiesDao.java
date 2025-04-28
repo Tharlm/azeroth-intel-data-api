@@ -57,7 +57,7 @@ public class CommoditiesDao {
     @NotNull
     @ColumnDefault("now()")
     @Column(name = "dt_updated", nullable = false)
-    private Instant dattUpdated;
+    private Instant dateUpdated;
 
     @Column(name = "lb_timeleft", columnDefinition = "auction_timeleft not null", nullable = false)
     @Enumerated(EnumType.STRING)
