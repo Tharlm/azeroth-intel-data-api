@@ -9,6 +9,7 @@ import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.post.PostConnectedRealmRequestDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.post.PostConnectedRealmRequestRealmInfoDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.update.PutConnectedRealmRequestDto;
+import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.update.PutConnectedRealmRequestRealmInfoDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -29,12 +30,12 @@ public interface ConnectedRealmWebMapper {
 
     UpdateCrModel dtoToUpdateCrModel(PostConnectedRealmRequestDto request);
 
-    @Mapping(target = "infos", source = ".")
+    @Mapping(target = "infos", source = "dto")
     UpdateCrModel.RealmInfoModel dtoToRealmInfoModel(PostConnectedRealmRequestRealmInfoDto dto);
 
     UpdateCrModel dtoToUpdateCrModel(PutConnectedRealmRequestDto request);
 
-    @Mapping(target = "infos", source = ".")
-    UpdateCrModel.RealmInfoModel dtoToRealmInfoModel(PutConnectedRealmRequestDto dto);
+    @Mapping(target = "infos", source = "dto")
+    UpdateCrModel.RealmInfoModel dtoToRealmInfoModel(PutConnectedRealmRequestRealmInfoDto dto);
 
 }

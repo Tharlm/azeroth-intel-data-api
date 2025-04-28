@@ -11,6 +11,7 @@ import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmDaoServi
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.impl.RegionDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl.ParametersServiceHelper;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.mappers.RealmBoMapper;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.ConnectedRealmBo;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.RealmBo;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.UpdateCrModel;
@@ -30,7 +31,7 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
     private final RegionDaoServiceExporter regionsServiceExporter;
     private final ParametersServiceHelper typeServiceHelper;
     private final ConnectedRealmDaoServiceExporter connectedRealmDaoServiceExporter;
-    private final RealmUtilsApiMapper realmMapper;
+    private final RealmBoMapper realmMapper;
 
     @Autowired
     public RealmsServiceHelperImpl(
@@ -38,7 +39,7 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
             final RegionDaoServiceExporter regionsServiceExporter,
             final ParametersServiceHelper typeServiceHelper,
             final ConnectedRealmDaoServiceExporter connectedRealmDaoServiceExporter,
-            final RealmUtilsApiMapper realmMapper
+            final RealmBoMapper realmMapper
     ) {
         this.realmDaoServiceExporter = realmDaoServiceExporter;
         this.regionsServiceExporter = regionsServiceExporter;
