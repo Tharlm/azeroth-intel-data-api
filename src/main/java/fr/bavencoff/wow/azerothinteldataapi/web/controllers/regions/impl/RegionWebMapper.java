@@ -1,7 +1,7 @@
 package fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.impl;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.mappers.AzerothMapperParent;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionBo;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionResponseDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionsResponseDto;
 import org.mapstruct.Mapper;
@@ -27,10 +27,10 @@ public interface RegionWebMapper {
     /**
      * Converts a single RegionApi object to a GetRegionResponseDto.
      *
-     * @param regionApi The RegionApi object to convert
+     * @param regionBo The RegionApi object to convert
      * @return The corresponding GetRegionResponseDto
      */
-    GetRegionResponseDto apiToDto(RegionApi regionApi);
+    GetRegionResponseDto apiToDto(RegionBo regionBo);
 
     /**
      * Converts a list of RegionApi objects to a GetRegionsResponseDto.
@@ -41,7 +41,7 @@ public interface RegionWebMapper {
      * @param apis The list of RegionApi objects to convert
      * @return A GetRegionsResponseDto containing the converted RegionResultDto objects
      */
-    default GetRegionsResponseDto apisToDtos(List<RegionApi> apis) {
+    default GetRegionsResponseDto apisToDtos(List<RegionBo> apis) {
         final GetRegionsResponseDto dto = new GetRegionsResponseDto();
         dto.setRegions(apisToDtosResult(apis));
         return dto;
@@ -53,8 +53,8 @@ public interface RegionWebMapper {
      * This method is used internally by apisToDtos to convert the individual
      * RegionApi objects to RegionResultDto objects.
      *
-     * @param regionApi The list of RegionApi objects to convert
+     * @param regionBo The list of RegionApi objects to convert
      * @return A list of corresponding RegionResultDto objects
      */
-    List<GetRegionsResponseDto.RegionResultDto> apisToDtosResult(List<RegionApi> regionApi);
+    List<GetRegionsResponseDto.RegionResultDto> apisToDtosResult(List<RegionBo> regionBo);
 }

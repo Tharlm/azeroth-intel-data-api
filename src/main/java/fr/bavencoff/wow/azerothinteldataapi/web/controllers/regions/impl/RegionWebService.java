@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 
 /**
  * Service class that handles web-related operations for regions.
- * 
+ * <p>
  * This service acts as an intermediary between the controller layer and the API service layer.
  * It's responsible for:
  * 1. Receiving requests from the controller
  * 2. Delegating data retrieval to the API service
  * 3. Converting API models to DTOs using the mapper
  * 4. Returning the appropriate response DTOs to the controller
- * 
+ * <p>
  * The service logs all operations for debugging and monitoring purposes.
  */
 @Slf4j
@@ -30,7 +30,7 @@ public class RegionWebService {
      * Constructs a new RegionWebService with the required dependencies.
      *
      * @param serviceExporter The API service that provides access to region data
-     * @param mapper The mapper that converts between API models and DTOs
+     * @param mapper          The mapper that converts between API models and DTOs
      */
     @Autowired
     public RegionWebService(

@@ -1,6 +1,7 @@
 package fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.KeyParameterType;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl.ParametersHelper;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,12 +35,13 @@ public class ParameterTypeDao implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @Column(name = "lb_key", nullable = false, length = 3)
+    @Column(name = "lb_key", nullable = false, length = ParametersHelper.PARAMETER_KEY_MAX_LENGTH)
     @Enumerated(EnumType.STRING)
     private KeyParameterType key;
-    @Column(name = "lb_type", nullable = false, length = 50)
+    @Column(name = "lb_type", nullable = false, length = ParametersHelper.PARAMETER_TYPE_MAX_LENGTH)
+    @NotBlank
     private String type;
-    @Column(name = "lb_name", length = 50)
+    @Column(name = "lb_name", length = ParametersHelper.PARAMETER_NAME_MAX_LENGTH)
     private String name;
 
     @Override

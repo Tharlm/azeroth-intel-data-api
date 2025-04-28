@@ -1,8 +1,8 @@
 package fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
-import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.connectedrealms.ConnectedRealmNotFoundException;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.ConnectedRealmDao;
+import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.exceptions.ConnectedRealmNotFoundResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class ConnectedRealmDaoServiceExporter {
     public ConnectedRealmDao findById(Integer id) {
         Optional<ConnectedRealmDao> connectedRealm = this.repository.findById(id);
         if (connectedRealm.isEmpty()) {
-            throw new ConnectedRealmNotFoundException(id);
+            throw new ConnectedRealmNotFoundResponseException(id);
         }
         return connectedRealm.get();
     }

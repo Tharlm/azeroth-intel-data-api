@@ -2,7 +2,6 @@ package fr.bavencoff.wow.azerothinteldataapi.helpers.realms.impl;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.KeyParameterType;
-import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.connectedrealms.ConnectedRealmAlreadyExistsException;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.ConnectedRealmDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl.ConnectedRealmDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.ParameterTypeDao;
@@ -16,6 +15,7 @@ import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.ConnectedRealmB
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.RealmBo;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.UpdateCrModel;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.UpdateRealmModel;
+import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.exceptions.ConnectedRealmAlreadyExistsResponseException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -137,7 +137,7 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
 
         Optional<ConnectedRealmDao> optionalById = this.connectedRealmDaoServiceExporter.findOptionalById(id);
         if (optionalById.isPresent()) {
-            throw new ConnectedRealmAlreadyExistsException(id);
+            throw new ConnectedRealmAlreadyExistsResponseException(id);
         }
 
         ConnectedRealmDao connectedRealmDao = new ConnectedRealmDao();

@@ -3,7 +3,8 @@ package fr.bavencoff.wow.azerothinteldataapi.helpers.regions.impl;
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.impl.RegionDaoServiceExporter;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.mappers.RegionBoMapper;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionBo;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.exceptions.RegionNotFoundResponseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -41,7 +42,7 @@ class RegionServiceHelperImplTest {
     private RegionDaoServiceExporter daoServiceExporter;
 
     @Mock
-    private RegionApiMapper mapper;
+    private RegionBoMapper mapper;
 
     @InjectMocks
     private RegionServiceHelperImpl regionApiService;
@@ -61,7 +62,7 @@ class RegionServiceHelperImplTest {
         regionDao.setName("North America");
         regionDao.setTag(GlobalRegion.US);
 
-        RegionApi expectedApi = new RegionApi();
+        RegionBo expectedApi = new RegionBo();
         expectedApi.setId(regionId.intValue());
         expectedApi.setName("North America");
         expectedApi.setTag(GlobalRegion.US);
@@ -70,7 +71,7 @@ class RegionServiceHelperImplTest {
         when(mapper.daoToApi(regionDao)).thenReturn(expectedApi);
 
         // Act
-        RegionApi result = regionApiService.getRegion(regionId);
+        RegionBo result = regionApiService.getRegion(regionId);
 
         // Assert
         assertNotNull(result);
@@ -111,23 +112,23 @@ class RegionServiceHelperImplTest {
 
         List<RegionDao> regionDaos = Arrays.asList(regionDao1, regionDao2);
 
-        RegionApi regionApi1 = new RegionApi();
-        regionApi1.setId(1);
-        regionApi1.setName("North America");
-        regionApi1.setTag(GlobalRegion.US);
+        RegionBo regionBo1 = new RegionBo();
+        regionBo1.setId(1);
+        regionBo1.setName("North America");
+        regionBo1.setTag(GlobalRegion.US);
 
-        RegionApi regionApi2 = new RegionApi();
-        regionApi2.setId(3);
-        regionApi2.setName("Europe");
-        regionApi2.setTag(GlobalRegion.EU);
+        RegionBo regionBo2 = new RegionBo();
+        regionBo2.setId(3);
+        regionBo2.setName("Europe");
+        regionBo2.setTag(GlobalRegion.EU);
 
-        List<RegionApi> expectedApis = Arrays.asList(regionApi1, regionApi2);
+        List<RegionBo> expectedApis = Arrays.asList(regionBo1, regionBo2);
 
         when(daoServiceExporter.findAll()).thenReturn(regionDaos);
         when(mapper.daosToApis(regionDaos)).thenReturn(expectedApis);
 
         // Act
-        List<RegionApi> result = regionApiService.getRegions();
+        List<RegionBo> result = regionApiService.getRegions();
 
         // Assert
         assertNotNull(result);
@@ -148,13 +149,13 @@ class RegionServiceHelperImplTest {
     void getRegions_ShouldReturnEmptyList_WhenNoRegionsExist() {
         // Arrange
         List<RegionDao> emptyList = Collections.emptyList();
-        List<RegionApi> emptyApiList = Collections.emptyList();
+        List<RegionBo> emptyApiList = Collections.emptyList();
 
         when(daoServiceExporter.findAll()).thenReturn(emptyList);
         when(mapper.daosToApis(emptyList)).thenReturn(emptyApiList);
 
         // Act
-        List<RegionApi> result = regionApiService.getRegions();
+        List<RegionBo> result = regionApiService.getRegions();
 
         // Assert
         assertNotNull(result);

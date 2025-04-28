@@ -1,8 +1,8 @@
-package fr.bavencoff.wow.azerothinteldataapi.helpers.regions.impl;
+package fr.bavencoff.wow.azerothinteldataapi.helpers.mappers;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.mappers.AzerothMapperParent;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionBo;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import java.util.List;
 @Mapper(
         config = AzerothMapperParent.class
 )
-public interface RegionApiMapper {
+public interface RegionBoMapper {
 
     /**
      * Converts a single RegionDao object to a RegionApi.
@@ -29,7 +29,7 @@ public interface RegionApiMapper {
      * @param dao The RegionDao object to convert
      * @return The corresponding RegionApi
      */
-    RegionApi daoToApi(RegionDao dao);
+    RegionBo daoToApi(RegionDao dao);
 
     /**
      * Converts a list of RegionDao objects to a list of RegionApi objects.
@@ -37,5 +37,5 @@ public interface RegionApiMapper {
      * @param daos The list of RegionDao objects to convert
      * @return A list of corresponding RegionApi objects
      */
-    List<RegionApi> daosToApis(List<RegionDao> daos);
+    List<RegionBo> daosToApis(List<RegionDao> daos);
 }

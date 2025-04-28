@@ -1,7 +1,7 @@
 package fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.impl;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.mappers.AzerothMapperParent;
-import fr.bavencoff.wow.azerothinteldataapi.common.mappers.ParameterMapper;
+import fr.bavencoff.wow.azerothinteldataapi.common.mappers.GeneralBusinessObjetMapper;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.ConnectedRealmBo;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.RealmBo;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.UpdateCrModel;
@@ -16,7 +16,7 @@ import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(config = AzerothMapperParent.class, uses = {
-        ParameterMapper.class
+        GeneralBusinessObjetMapper.class
 })
 public interface ConnectedRealmWebMapper {
 

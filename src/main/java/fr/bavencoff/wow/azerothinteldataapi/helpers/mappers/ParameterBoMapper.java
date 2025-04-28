@@ -1,15 +1,15 @@
-package fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl;
+package fr.bavencoff.wow.azerothinteldataapi.helpers.mappers;
 
+import fr.bavencoff.wow.azerothinteldataapi.common.mappers.AzerothMapperParent;
 import fr.bavencoff.wow.azerothinteldataapi.common.mappers.GenericMapper;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.ParameterTypeDao;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.model.ParameterApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.model.ParameterBo;
 import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
 
 @Mapper(
-        componentModel = MappingConstants.ComponentModel.SPRING
+        config = AzerothMapperParent.class
 )
-public interface ParameterApiMapper extends GenericMapper<ParameterTypeDao, ParameterApi> {
+public interface ParameterBoMapper extends GenericMapper<ParameterTypeDao, ParameterBo> {
 
     default String parameterTypeToString(ParameterTypeDao dao) {
         if (dao == null) {

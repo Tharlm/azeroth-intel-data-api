@@ -1,6 +1,6 @@
 package fr.bavencoff.wow.azerothinteldataapi.helpers.regions.impl;
 
-import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionBo;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.exceptions.RegionNotFoundResponseException;
 
 import java.util.List;
@@ -21,12 +21,12 @@ public interface RegionServiceHelper {
      * @return The RegionApi object containing the region's information
      * @throws RegionNotFoundResponseException if the region with the specified ID is not found
      */
-    RegionApi getRegion(Short regionId);
+    RegionBo getRegion(Short regionId);
 
     /**
      * Retrieves all available regions.
      *
      * @return A list of RegionApi objects containing information about all regions
      */
-    List<RegionApi> getRegions();
+    List<RegionBo> getRegions();
 }

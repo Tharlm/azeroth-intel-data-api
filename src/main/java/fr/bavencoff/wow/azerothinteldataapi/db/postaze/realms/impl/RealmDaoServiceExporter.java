@@ -1,7 +1,7 @@
 package fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl;
 
-import fr.bavencoff.wow.azerothinteldataapi.common.exceptions.realms.RealmNotFoundException;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.dao.RealmDao;
+import fr.bavencoff.wow.azerothinteldataapi.web.controllers.realms.exceptions.RealmNotFoundResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,7 @@ public class RealmDaoServiceExporter {
     public RealmDao findById(Integer id) {
         final Optional<RealmDao> realmDao = this.findOptionalById(id);
         if (realmDao.isEmpty()) {
-            throw new RealmNotFoundException(id);
+            throw new RealmNotFoundResponseException(id);
         }
         return realmDao.get();
     }

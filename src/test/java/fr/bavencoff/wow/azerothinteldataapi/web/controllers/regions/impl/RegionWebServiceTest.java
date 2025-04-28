@@ -2,7 +2,7 @@ package fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.impl;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.impl.RegionServiceHelper;
-import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionApi;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionBo;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionResponseDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.dto.GetRegionsResponseDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.exceptions.RegionNotFoundResponseException;
@@ -57,18 +57,18 @@ class RegionWebServiceTest {
     void getRegion_ShouldReturnCorrectDto_WhenValidIdProvided() {
         // Arrange
         Short regionId = 1;
-        RegionApi regionApi = new RegionApi();
-        regionApi.setId(regionId.intValue());
-        regionApi.setName("North America");
-        regionApi.setTag(GlobalRegion.US);
+        RegionBo regionBo = new RegionBo();
+        regionBo.setId(regionId.intValue());
+        regionBo.setName("North America");
+        regionBo.setTag(GlobalRegion.US);
 
         GetRegionResponseDto expectedDto = new GetRegionResponseDto();
         expectedDto.setId(regionId);
         expectedDto.setName("North America");
         expectedDto.setTag(GlobalRegion.US);
 
-        when(regionServiceHelper.getRegion(regionId)).thenReturn(regionApi);
-        when(regionWebMapper.apiToDto(regionApi)).thenReturn(expectedDto);
+        when(regionServiceHelper.getRegion(regionId)).thenReturn(regionBo);
+        when(regionWebMapper.apiToDto(regionBo)).thenReturn(expectedDto);
 
         // Act
         GetRegionResponseDto result = regionWebService.getRegion(regionId);
@@ -80,7 +80,7 @@ class RegionWebServiceTest {
         assertEquals(GlobalRegion.US, result.getTag());
 
         verify(regionServiceHelper, times(1)).getRegion(regionId);
-        verify(regionWebMapper, times(1)).apiToDto(regionApi);
+        verify(regionWebMapper, times(1)).apiToDto(regionBo);
     }
 
     @Test
@@ -100,17 +100,17 @@ class RegionWebServiceTest {
     @DisplayName("getRegions should return all regions")
     void getRegions_ShouldReturnAllRegions() {
         // Arrange
-        RegionApi region1 = new RegionApi();
+        RegionBo region1 = new RegionBo();
         region1.setId(1);
         region1.setName("North America");
         region1.setTag(GlobalRegion.US);
 
-        RegionApi region2 = new RegionApi();
+        RegionBo region2 = new RegionBo();
         region2.setId(3);
         region2.setName("Europe");
         region2.setTag(GlobalRegion.EU);
 
-        List<RegionApi> regionApis = Arrays.asList(region1, region2);
+        List<RegionBo> regionBos = Arrays.asList(region1, region2);
 
         GetRegionsResponseDto.RegionResultDto resultDto1 = new GetRegionsResponseDto.RegionResultDto();
         resultDto1.setId((short) 1);
@@ -127,8 +127,8 @@ class RegionWebServiceTest {
         GetRegionsResponseDto expectedDto = new GetRegionsResponseDto();
         expectedDto.setRegions(resultDtos);
 
-        when(regionServiceHelper.getRegions()).thenReturn(regionApis);
-        when(regionWebMapper.apisToDtos(regionApis)).thenReturn(expectedDto);
+        when(regionServiceHelper.getRegions()).thenReturn(regionBos);
+        when(regionWebMapper.apisToDtos(regionBos)).thenReturn(expectedDto);
 
         // Act
         GetRegionsResponseDto result = regionWebService.getRegions();
@@ -145,14 +145,14 @@ class RegionWebServiceTest {
         assertEquals("EU", result.getRegions().get(1).getTag());
 
         verify(regionServiceHelper, times(1)).getRegions();
-        verify(regionWebMapper, times(1)).apisToDtos(regionApis);
+        verify(regionWebMapper, times(1)).apisToDtos(regionBos);
     }
 
     @Test
     @DisplayName("getRegions should return empty list when no regions exist")
     void getRegions_ShouldReturnEmptyList_WhenNoRegionsExist() {
         // Arrange
-        List<RegionApi> emptyList = Collections.emptyList();
+        List<RegionBo> emptyList = Collections.emptyList();
         GetRegionsResponseDto emptyDto = new GetRegionsResponseDto();
         emptyDto.setRegions(Collections.emptyList());
 
