@@ -13,7 +13,8 @@ public class TestCacheConfig {
     @Bean
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager(
-                "findRegionDaoById"
+                "findRegionDaoById",
+                "findByKeyAndType"
         );
     }
 }
