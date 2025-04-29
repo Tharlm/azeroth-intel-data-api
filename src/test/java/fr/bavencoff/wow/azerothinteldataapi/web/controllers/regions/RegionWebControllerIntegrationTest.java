@@ -41,9 +41,6 @@ class RegionWebControllerIntegrationTest {
     @Test
     @DisplayName("GET /regions/{id} should return the region when it exists")
     void getRegion_ShouldReturnRegion_WhenItExists() throws Exception {
-        // Arrange
-        Short regionId = 1;
-
         // Act & Assert
         mockMvc.perform(get("/regions/{id}", 1)
                         .contentType(MediaType.APPLICATION_JSON))
