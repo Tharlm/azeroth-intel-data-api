@@ -6,13 +6,20 @@ import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.update.PutConnectedRealmRequestDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.update.PutConnectedRealmResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +29,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller class for managing connected realms.
+ * This controller provides endpoints to retrieve, create, and update information about World of Warcraft connected realms.
+ * All endpoints return data in JSON format and follow RESTful principles.
+ */
 @RestController
 @RequestMapping("/connectedrealms")
+@Tag(name = "Connected Realms", description = "Information about World of Warcraft connected realms")
 @Validated
 public class ConnectedRealmsWebController {
 
@@ -43,13 +56,20 @@ public class ConnectedRealmsWebController {
      */
     @Operation(summary = "Fetch all connected realms", description = "Retrieve all connected realms stored in the system.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully retrieved connected realms"),
-            @ApiResponse(responseCode = "500", description = "Internal server error while retrieving connected realms")
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully retrieved connected realms",
+                    content = @Content(schema = @Schema(implementation = GetAllConnectedRealmResponseDto.class))
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error while retrieving connected realms",
+                    content = @Content(schema = @Schema(implementation = ProblemDetail.class))
+            )
     })
-
-    @GetMapping(path = "")
-    public GetAllConnectedRealmResponseDto findAll() {
-        return this.connectedRealmsService.findAll();
+    @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<GetAllConnectedRealmResponseDto> findAll() {
+        return ResponseEntity.ok(this.connectedRealmsService.findAll());
     }
 
     /**
@@ -60,16 +80,28 @@ public class ConnectedRealmsWebController {
      */
     @Operation(summary = "Create a connected realm", description = "Add a new connected realm to the system.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Connected realm created successfully"),
-            @ApiResponse(responseCode = "400", description = "Invalid input provided for creating a connected realm"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(
+                    responseCode = "201",
+                    description = "Connected realm created successfully",
+                    content = @Content(schema = @Schema(implementation = PostConnectedRealmResponseDto.class))
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid input provided for creating a connected realm",
+                    content = @Content(schema = @Schema(implementation = ProblemDetail.class))
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error",
+                    content = @Content(schema = @Schema(implementation = ProblemDetail.class))
+            )
     })
-
-    @PostMapping(path = "")
-    public PostConnectedRealmResponseDto postConnectedRealm(
+    @PostMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PostConnectedRealmResponseDto> postConnectedRealm(
+            @Parameter(description = "Connected realm data to create", required = true)
             @Valid @RequestBody final PostConnectedRealmRequestDto request
     ) {
-        return this.connectedRealmsService.post(request);
+        return ResponseEntity.status(201).body(this.connectedRealmsService.post(request));
     }
 
     /**
@@ -82,18 +114,42 @@ public class ConnectedRealmsWebController {
      */
     @Operation(summary = "Update a connected realm", description = "Modify the details of an existing connected realm.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Successfully updated the connected realm"),
-            @ApiResponse(responseCode = "400", description = "Invalid input provided for updating a connected realm"),
-            @ApiResponse(responseCode = "404", description = "Connected realm not found"),
-            @ApiResponse(responseCode = "500", description = "Internal server error")
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully updated the connected realm",
+                    content = @Content(schema = @Schema(implementation = PutConnectedRealmResponseDto.class))
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Invalid input provided for updating a connected realm",
+                    content = @Content(schema = @Schema(implementation = ProblemDetail.class))
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Connected realm not found",
+                    content = @Content(schema = @Schema(implementation = ProblemDetail.class))
+            ),
+            @ApiResponse(
+                    responseCode = "500",
+                    description = "Internal server error",
+                    content = @Content(schema = @Schema(implementation = ProblemDetail.class))
+            )
     })
+    @PutMapping(path = "{id}/region/{idRegion}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<PutConnectedRealmResponseDto> updateConnectedRealm(
+            @Parameter(description = "Unique identifier of the connected realm", example = "1")
+            @PathVariable("id") @Min(value = 0, message = "Connected realm ID must be greater than or equal to 0")
+            @Max(value = Integer.MAX_VALUE, message = "Connected realm ID must be valid")
+            @NotNull(message = "Connected realm ID cannot be null") final Integer id,
 
-    @PutMapping(path = "{id}/region/{idRegion}")
-    public PutConnectedRealmResponseDto updateConnectedRealm(
-            @PathVariable("id") @Min(0) @Max(Integer.MAX_VALUE) @NotNull final Integer id,
-            @PathVariable("idRegion") @Min(0) @Max(Short.MAX_VALUE) @NotNull final Short idRegion,
+            @Parameter(description = "Unique identifier of the region", example = "1")
+            @PathVariable("idRegion") @Min(value = 0, message = "Region ID must be greater than or equal to 0")
+            @Max(value = Short.MAX_VALUE, message = "Region ID must be valid")
+            @NotNull(message = "Region ID cannot be null") final Short idRegion,
+
+            @Parameter(description = "Updated connected realm data", required = true)
             @Valid @RequestBody final PutConnectedRealmRequestDto putConnectedRealmRequestDto
     ) {
-        return this.connectedRealmsService.put(id, idRegion, putConnectedRealmRequestDto);
+        return ResponseEntity.ok(this.connectedRealmsService.put(id, idRegion, putConnectedRealmRequestDto));
     }
 }
