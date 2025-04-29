@@ -15,6 +15,7 @@ import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.NamedSubgraph;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -62,9 +63,11 @@ public class ConnectedRealmDao implements Serializable {
     private boolean queue;
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_param_population", nullable = false)
+    @NotNull
     private ParameterTypeDao population;
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_param_status", nullable = false)
+    @NotNull
     private ParameterTypeDao status;
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.ALL)
     @JoinColumn(
@@ -72,10 +75,12 @@ public class ConnectedRealmDao implements Serializable {
             nullable = false,
             updatable = false
     )
+    @NotNull
     private RegionDao region;
     @Column(name = "bo_active", nullable = false)
     private boolean active;
     @Column(name = "dt_last_update", nullable = false)
+    @NotNull
     private Instant dateLastUpdate;
     @OneToMany(mappedBy = "connectedRealm")
     private Set<RealmDao> realms = new LinkedHashSet<>();
