@@ -72,7 +72,7 @@ public class ConnectedRealmsWebControllerIntegrationTest {
         mockMvc.perform(post("/connectedrealms")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestDto)))
-                .andExpect(status().isOk())
+                .andExpect(status().is2xxSuccessful())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id").value(requestDto.getId()));
     }
