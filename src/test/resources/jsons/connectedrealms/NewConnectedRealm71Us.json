@@ -1,0 +1,41 @@
+{
+  "id": 71,
+  "tagRegion": "US",
+  "queue": false,
+  "population": {
+    "name": "Full",
+    "type": "FULL"
+  },
+  "status": {
+    "name": "Up",
+    "type": "UP"
+  },
+  "realms": [
+    {
+      "id": 71,
+      "name": "Warsong",
+      "category": "United States",
+      "locale": "enUS",
+      "timezone": "America/New_York",
+      "slug": "warsong",
+      "type": {
+        "name": "Normal",
+        "type": "NORMAL"
+      },
+      "tournament": false
+    },
+    {
+      "id": 80,
+      "name": "Gorgonnash",
+      "category": "United States",
+      "locale": "enUS",
+      "timezone": "America/New_York",
+      "slug": "gorgonnash",
+      "type": {
+        "name": "Normal",
+        "type": "NORMAL"
+      },
+      "tournament": false
+    }
+  ]
+}

@@ -38,26 +38,26 @@ public interface RealmServiceHelper {
     /**
      * Crée un nouveau CR. Renvoie une exception s'il existe déjà un CR avec la même ID.
      * @param id ID du CR
-     * @param idRegion id de la région
+     * @param tag tag de la région
      * @param infos informations sur le CR
      * @return le nouveau CR.
      */
     ConnectedRealmBo createNewConnectedRealm(
             Integer id,
-            Short idRegion,
+            GlobalRegion tag,
             UpdateCrModel infos
     );
 
     /**
      * Créé ou met à jour un CR.
      * @param id ID du CR
-     * @param idRegion id de la région
+     * @param tag tag de la région
      * @param infos informations sur le CR
      * @return CR modifié / créé
      */
     ConnectedRealmBo createOrUpdateConnectedRealm(
             Integer id,
-            Short idRegion,
+            GlobalRegion tag,
             UpdateCrModel infos
     );
 

@@ -24,6 +24,17 @@
         </resources>
     </cache>
 
+    <cache alias="findRegionDaoByTag">
+        <key-type>fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion</key-type>
+        <value-type>fr.bavencoff.wow.postaze.region.dao.RegionDao</value-type>
+        <expiry>
+            <ttl unit="hours">168</ttl>
+        </expiry>
+        <resources>
+            <heap unit="entries">10</heap>
+        </resources>
+    </cache>
+
     <cache alias="findMkDungeonDaoById">
         <key-type>java.lang.Integer</key-type>
         <value-type>fr.bavencoff.wow.postaze.mkdungeon.dao.MkDungeon</value-type>

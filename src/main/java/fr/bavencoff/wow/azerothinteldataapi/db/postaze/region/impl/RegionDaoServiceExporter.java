@@ -1,5 +1,6 @@
 package fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.impl;
 
+import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.regions.exceptions.RegionNotFoundResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,22 @@ public class RegionDaoServiceExporter {
      */
     public Optional<RegionDao> findOptionalById(Short id) {
         return repository.findById(id);
+    }
+
+    /**
+     * Retrieves an Region by its tag
+     *
+     * @param tag Tag of the region (functional identifier)
+     * @return RegionDao corresponding to tag
+     */
+    @Cacheable("findRegionDaoByTag")
+    public RegionDao findByTag(GlobalRegion tag) {
+        final List<RegionDao> regionDaos = this.repository.findByTag(tag);
+
+        if (regionDaos.isEmpty()) {
+            throw new RegionNotFoundResponseException(tag);
+        }
+        return regionDaos.getFirst();
     }
 
     /**

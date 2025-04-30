@@ -1,0 +1,8 @@
+{
+  "type": "connected-realm-already-exists",
+  "title": "Connected realm already exists",
+  "status": 409,
+  "detail": "Connected Realm with id 12 already exists.",
+  "instance": "/connectedrealms",
+  "timestamp": "2024-01-20T23:28:40.703917Z"
+}

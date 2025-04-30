@@ -5,6 +5,8 @@ import fr.bavencoff.wow.azerothinteldataapi.common.mappers.GeneralBusinessObjetM
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.ConnectedRealmBo;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.RealmBo;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.UpdateCrModel;
+import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.get.GetConnectedRealmRealmDto;
+import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.get.GetConnectedRealmResponseDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.getall.GetAllConnectedRealmResponseDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.post.PostConnectedRealmRequestDto;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.post.PostConnectedRealmRequestRealmInfoDto;
@@ -37,5 +39,9 @@ public interface ConnectedRealmWebMapper {
 
     @Mapping(target = "infos", source = "dto")
     UpdateCrModel.RealmInfoModel dtoToRealmInfoModel(PutConnectedRealmRequestRealmInfoDto dto);
+
+    GetConnectedRealmResponseDto boToGetConnectedRealmResponseDto(ConnectedRealmBo bo);
+
+    GetConnectedRealmRealmDto boToGetConnectedRealmResponseDto(RealmBo bo);
 
 }

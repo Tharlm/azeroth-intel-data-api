@@ -14,7 +14,9 @@ public class TestCacheConfig {
     public CacheManager cacheManager() {
         return new ConcurrentMapCacheManager(
                 "findRegionDaoById",
-                "findByKeyAndType"
+                "findRegionDaoByTag",
+                "findByKeyAndType",
+                "findConnectedRealmDaoById"
         );
     }
 }

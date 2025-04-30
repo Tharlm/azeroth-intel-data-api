@@ -1,5 +1,6 @@
 package fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.dto.post;
 
+import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
 import fr.bavencoff.wow.azerothinteldataapi.common.model.GenericTypeName;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
@@ -21,10 +22,8 @@ public class PostConnectedRealmRequestDto {
     @Max(Integer.MAX_VALUE)
     @NotNull
     private Integer id;
-    @Min(0)
-    @Max(Short.MAX_VALUE)
     @NotNull
-    private Short idRegion;
+    private GlobalRegion tagRegion;
     private boolean queue;
     @NotNull
     private GenericTypeName population;

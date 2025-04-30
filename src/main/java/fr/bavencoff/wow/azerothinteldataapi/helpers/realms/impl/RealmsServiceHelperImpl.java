@@ -71,20 +71,20 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
     @Override
     public ConnectedRealmBo createNewConnectedRealm(
             Integer id,
-            Short idRegion,
+            GlobalRegion tag,
             UpdateCrModel infos
     ) {
-        RegionDao region = this.regionsServiceExporter.findById(idRegion);
+        RegionDao region = this.regionsServiceExporter.findByTag(tag);
         return this.realmMapper.daoToApi(this.createNewConnectedRealm(id, region, infos));
     }
 
     @Override
     public ConnectedRealmBo createOrUpdateConnectedRealm(
             Integer id,
-            Short idRegion,
+            GlobalRegion tag,
             UpdateCrModel infos
     ) {
-        RegionDao regionDao = this.regionsServiceExporter.findById(idRegion);
+        RegionDao regionDao = this.regionsServiceExporter.findByTag(tag);
         return this.realmMapper.daoToApi(this.createOrUpdateConnectedRealm(id, regionDao, infos));
     }
 

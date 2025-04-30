@@ -1,0 +1,19 @@
+{
+  "id": 71,
+  "queue": false,
+  "population": "FULL",
+  "status": "UP",
+  "realms": [
+    {
+      "id": 71,
+      "name": "Warsong",
+      "slug": "warsong"
+    },
+    {
+      "id": 80,
+      "name": "Gorgonnash",
+      "slug": "gorgonnash"
+    }
+  ],
+  "region": "US"
+}
