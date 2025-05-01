@@ -18,12 +18,16 @@ public class ParameterTypeServiceExporter {
         this.repository = repository;
     }
 
-    @Cacheable(cacheNames = "findByKeyAndType")
+    @Cacheable(cacheNames = "findByKeyAndType", unless = "#result == null")
     public ParameterTypeDao findByKeyAndType(
             KeyParameterType key,
             String type
     ) {
         return this.repository.findByKeyAndType(key, type);
+    }
+
+    public ParameterTypeDao save(final ParameterTypeDao parameterTypeDao) {
+        return this.repository.save(parameterTypeDao);
     }
 
 }

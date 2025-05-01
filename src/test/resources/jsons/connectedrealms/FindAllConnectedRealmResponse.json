@@ -1,33 +1,6 @@
 {
   "results": [
     {
-      "id": 12,
-      "queue": false,
-      "population": "LOW",
-      "status": "UP",
-      "region": "US",
-      "realms": [
-        {
-          "id": 1370,
-          "name": "Farstriders",
-          "slug": "farstriders",
-          "region": "US"
-        },
-        {
-          "id": 12,
-          "name": "Silver Hand",
-          "slug": "silver-hand",
-          "region": "US"
-        },
-        {
-          "id": 1154,
-          "name": "Thorium Brotherhood",
-          "slug": "thorium-brotherhood",
-          "region": "US"
-        }
-      ]
-    },
-    {
       "id": 531,
       "queue": false,
       "population": "LOW",
@@ -35,15 +8,9 @@
       "region": "EU",
       "realms": [
         {
-          "id": 615,
-          "name": "Terrordar",
-          "slug": "terrordar",
-          "region": "EU"
-        },
-        {
-          "id": 605,
-          "name": "Theradras",
-          "slug": "theradras",
+          "id": 531,
+          "name": "Dethecus",
+          "slug": "dethecus",
           "region": "EU"
         },
         {
@@ -59,9 +26,15 @@
           "region": "EU"
         },
         {
-          "id": 531,
-          "name": "Dethecus",
-          "slug": "dethecus",
+          "id": 615,
+          "name": "Terrordar",
+          "slug": "terrordar",
+          "region": "EU"
+        },
+        {
+          "id": 605,
+          "name": "Theradras",
+          "slug": "theradras",
           "region": "EU"
         }
       ]

@@ -1,0 +1,66 @@
+{
+  "idRegion": 1,
+  "queue": true,
+  "population": {
+    "name": "Full",
+    "type": "FULL"
+  },
+  "status": {
+    "name": "Up",
+    "type": "UP"
+  },
+  "realms": [
+    {
+      "id": 12,
+      "name": "Silver Hand",
+      "category": "United States",
+      "locale": "enUS",
+      "timezone": "America/Los_Angeles",
+      "slug": "silver-hand",
+      "type": {
+        "name": "Roleplaying",
+        "type": "RP"
+      },
+      "tournament": false
+    },
+    {
+      "id": 1154,
+      "name": "Thorium Brotherhood",
+      "category": "United States",
+      "locale": "enUS",
+      "timezone": "America/Los_Angeles",
+      "slug": "thorium-brotherhood",
+      "type": {
+        "name": "Roleplaying",
+        "type": "RP"
+      },
+      "tournament": false
+    },
+    {
+      "id": 1370,
+      "name": "Farstriders",
+      "category": "United States",
+      "locale": "enUS",
+      "timezone": "America/Los_Angeles",
+      "slug": "farstriders",
+      "type": {
+        "name": "Roleplaying",
+        "type": "RP"
+      },
+      "tournament": false
+    },
+    {
+      "id": 1288,
+      "name": "Anvilmar",
+      "category": "United States",
+      "locale": "enUS",
+      "timezone": "America/Los_Angeles",
+      "slug": "anvilmar",
+      "type": {
+        "name": "Roleplaying",
+        "type": "RP"
+      },
+      "tournament": false
+    }
+  ]
+}

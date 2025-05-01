@@ -12,6 +12,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
+import java.util.List;
+
 @Service
 public class ConnectedRealmsWebService {
 
@@ -33,8 +36,15 @@ public class ConnectedRealmsWebService {
      * @return Lite des CRs.
      */
     public GetAllConnectedRealmResponseDto findAll() {
+        final List<GetAllConnectedRealmResponseDto.GetAllConnectedRealmResultDto> results = mapper.apisToDtos(this.realmServiceHelper.getConnectedRealms());
+        results.stream()
+                .sorted(Comparator.comparing(GetAllConnectedRealmResponseDto.GetAllConnectedRealmResultDto::getId))
+                .forEach(result -> result.getRealms().sort(
+                        Comparator.comparing(GetAllConnectedRealmResponseDto.GetAllConnectedRealmRealmDto::getName)
+                ));
+
         var dto = new GetAllConnectedRealmResponseDto();
-        dto.setResults(mapper.apisToDtos(this.realmServiceHelper.getConnectedRealms()));
+        dto.setResults(results);
         return dto;
     }
 

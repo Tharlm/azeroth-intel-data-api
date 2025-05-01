@@ -28,6 +28,7 @@ public class ParametersServiceHelper {
             param.setName(typeLabel);
             param.setKey(key);
             param.setType(type);
+            return this.parameterTypeServiceExporter.save(param);
         }
         return param;
     }
