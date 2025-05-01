@@ -1,16 +1,38 @@
 package fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl;
 
 import fr.bavencoff.wow.azerothinteldataapi.common.enums.KeyParameterType;
+import fr.bavencoff.wow.azerothinteldataapi.common.model.GenericTypeName;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.ParameterTypeDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.impl.ParameterTypeServiceExporter;
+import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.impl.ParameterTypeDaoServiceExporter;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ParametersServiceHelper {
-    private final ParameterTypeServiceExporter parameterTypeServiceExporter;
+    private final ParameterTypeDaoServiceExporter parameterTypeDaoServiceExporter;
 
-    public ParametersServiceHelper(ParameterTypeServiceExporter parameterTypeServiceExporter) {
-        this.parameterTypeServiceExporter = parameterTypeServiceExporter;
+    public ParametersServiceHelper(ParameterTypeDaoServiceExporter parameterTypeDaoServiceExporter) {
+        this.parameterTypeDaoServiceExporter = parameterTypeDaoServiceExporter;
+    }
+
+    public ParameterTypeDao getParameterType(
+            final GenericTypeName genericTypeName,
+            ParameterTypeDao dao
+    ) {
+        if (genericTypeName == null) {
+            return null;
+        } else if (
+                dao == null || !StringUtils.equals(dao.getType(), genericTypeName.getType())
+        ) {
+            return this.getParameterType(
+                    KeyParameterType.CRP,
+                    genericTypeName.getType(),
+                    genericTypeName.getName()
+            );
+        } else {
+            dao.setName(genericTypeName.getName());
+            return dao;
+        }
     }
 
     public ParameterTypeDao getParameterType(
@@ -19,7 +41,7 @@ public class ParametersServiceHelper {
             String typeLabel
     ) {
 
-        ParameterTypeDao param = this.parameterTypeServiceExporter.findByKeyAndType(
+        ParameterTypeDao param = this.parameterTypeDaoServiceExporter.findByKeyAndType(
                 key,
                 type
         );
@@ -28,7 +50,7 @@ public class ParametersServiceHelper {
             param.setName(typeLabel);
             param.setKey(key);
             param.setType(type);
-            return this.parameterTypeServiceExporter.save(param);
+            return this.parameterTypeDaoServiceExporter.save(param);
         }
         return param;
     }
