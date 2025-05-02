@@ -1,3 +1,4 @@
 databaseChangeLog:
   - include:
       file: db/changelog/initial-baseline.yaml
+#      file: src/main/resources/db/changelog/initial-baseline.yaml

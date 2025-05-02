@@ -270,14 +270,12 @@ databaseChangeLog:
         - createTable:
             columns:
               - column:
-                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: tb_mk_season_pk
                   name: id_tec_mk_season
                   remarks: ID interne
-                  startWith: 57
                   type: INTEGER
               - column:
                   constraints:
@@ -307,14 +305,12 @@ databaseChangeLog:
         - createTable:
             columns:
               - column:
-                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: tb_mk_period_pk
                   name: id_tec_mk_period
                   remarks: ID interne
-                  startWith: 1716
                   type: INTEGER
               - column:
                   constraints:
@@ -341,13 +337,11 @@ databaseChangeLog:
         - createTable:
             columns:
               - column:
-                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: tb_mk_leaderboard_pkey
                   name: id_tec_mk_leaderboard
-                  startWith: 5693
                   type: INTEGER
               - column:
                   constraints:
@@ -407,14 +401,12 @@ databaseChangeLog:
         - createTable:
             columns:
               - column:
-                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: tb_mk_leaderboard_group_pk
                   incrementBy: 500
                   name: id_tec_mk_leaderboard_group
-                  startWith: 1762002
                   type: INTEGER
               - column:
                   constraints:
@@ -448,14 +440,12 @@ databaseChangeLog:
         - createTable:
             columns:
               - column:
-                  autoIncrement: true
                   constraints:
                     nullable: false
                     primaryKey: true
                     primaryKeyName: tb_mk_leaderboard_members_pk
                   incrementBy: 2500
                   name: id_tec_mk_leaderboard_members
-                  startWith: 8799344
                   type: INTEGER
               - column:
                   constraints:
@@ -685,326 +675,6 @@ databaseChangeLog:
             indexName: tb_auction_house_id_connected_realm_index
             tableName: tb_auction_house
   - changeSet:
-      id: 1745863066945-18
-      author: patri (generated)
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: tb_auction_house_region_1_pkey
-                  name: id
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: id_item
-                  type: BIGINT
-              - column:
-                  name: id_pet_breed
-                  type: INTEGER
-              - column:
-                  name: nb_pet_level
-                  type: SMALLINT
-              - column:
-                  name: id_pet_quality
-                  type: SMALLINT
-              - column:
-                  name: id_pet_species
-                  type: SMALLINT
-              - column:
-                  name: nb_bid
-                  type: BIGINT
-              - column:
-                  name: nb_buyout
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: lb_timeleft
-                  type: VARCHAR(15)
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueBoolean: false
-                  name: bo_deleted
-                  type: BOOLEAN
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueComputed: now()
-                  name: dt_imported
-                  type: TIMESTAMP WITHOUT TIME ZONE
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueComputed: now()
-                  name: dt_updated
-                  type: TIMESTAMP WITHOUT TIME ZONE
-              - column:
-                  constraints:
-                    nullable: false
-                  name: id_connected_realm
-                  type: INTEGER
-              - column:
-                  constraints:
-                    nullable: false
-                  name: nb_quantity
-                  type: SMALLINT
-              - column:
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: tb_auction_house_region_1_pkey
-                  name: id_region
-                  type: SMALLINT
-              - column:
-                  name: bo_sold
-                  type: BOOLEAN
-            tableName: tb_auction_house_region_1
-  - changeSet:
-      id: 1745863066945-19
-      author: patri (generated)
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: tb_auction_house_region_2_pkey
-                  name: id
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: id_item
-                  type: BIGINT
-              - column:
-                  name: id_pet_breed
-                  type: INTEGER
-              - column:
-                  name: nb_pet_level
-                  type: SMALLINT
-              - column:
-                  name: id_pet_quality
-                  type: SMALLINT
-              - column:
-                  name: id_pet_species
-                  type: SMALLINT
-              - column:
-                  name: nb_bid
-                  type: BIGINT
-              - column:
-                  name: nb_buyout
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: lb_timeleft
-                  type: VARCHAR(15)
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueBoolean: false
-                  name: bo_deleted
-                  type: BOOLEAN
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueComputed: now()
-                  name: dt_imported
-                  type: TIMESTAMP WITHOUT TIME ZONE
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueComputed: now()
-                  name: dt_updated
-                  type: TIMESTAMP WITHOUT TIME ZONE
-              - column:
-                  constraints:
-                    nullable: false
-                  name: id_connected_realm
-                  type: INTEGER
-              - column:
-                  constraints:
-                    nullable: false
-                  name: nb_quantity
-                  type: SMALLINT
-              - column:
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: tb_auction_house_region_2_pkey
-                  name: id_region
-                  type: SMALLINT
-              - column:
-                  name: bo_sold
-                  type: BOOLEAN
-            tableName: tb_auction_house_region_2
-  - changeSet:
-      id: 1745863066945-20
-      author: patri (generated)
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: tb_auction_house_region_3_pkey
-                  name: id
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: id_item
-                  type: BIGINT
-              - column:
-                  name: id_pet_breed
-                  type: INTEGER
-              - column:
-                  name: nb_pet_level
-                  type: SMALLINT
-              - column:
-                  name: id_pet_quality
-                  type: SMALLINT
-              - column:
-                  name: id_pet_species
-                  type: SMALLINT
-              - column:
-                  name: nb_bid
-                  type: BIGINT
-              - column:
-                  name: nb_buyout
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: lb_timeleft
-                  type: VARCHAR(15)
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueBoolean: false
-                  name: bo_deleted
-                  type: BOOLEAN
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueComputed: now()
-                  name: dt_imported
-                  type: TIMESTAMP WITHOUT TIME ZONE
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueComputed: now()
-                  name: dt_updated
-                  type: TIMESTAMP WITHOUT TIME ZONE
-              - column:
-                  constraints:
-                    nullable: false
-                  name: id_connected_realm
-                  type: INTEGER
-              - column:
-                  constraints:
-                    nullable: false
-                  name: nb_quantity
-                  type: SMALLINT
-              - column:
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: tb_auction_house_region_3_pkey
-                  name: id_region
-                  type: SMALLINT
-              - column:
-                  name: bo_sold
-                  type: BOOLEAN
-            tableName: tb_auction_house_region_3
-  - changeSet:
-      id: 1745863066945-21
-      author: patri (generated)
-      changes:
-        - createTable:
-            columns:
-              - column:
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: tb_auction_house_region_4_pkey
-                  name: id
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: id_item
-                  type: BIGINT
-              - column:
-                  name: id_pet_breed
-                  type: INTEGER
-              - column:
-                  name: nb_pet_level
-                  type: SMALLINT
-              - column:
-                  name: id_pet_quality
-                  type: SMALLINT
-              - column:
-                  name: id_pet_species
-                  type: SMALLINT
-              - column:
-                  name: nb_bid
-                  type: BIGINT
-              - column:
-                  name: nb_buyout
-                  type: BIGINT
-              - column:
-                  constraints:
-                    nullable: false
-                  name: lb_timeleft
-                  type: VARCHAR(15)
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueBoolean: false
-                  name: bo_deleted
-                  type: BOOLEAN
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueComputed: now()
-                  name: dt_imported
-                  type: TIMESTAMP WITHOUT TIME ZONE
-              - column:
-                  constraints:
-                    nullable: false
-                  defaultValueComputed: now()
-                  name: dt_updated
-                  type: TIMESTAMP WITHOUT TIME ZONE
-              - column:
-                  constraints:
-                    nullable: false
-                  name: id_connected_realm
-                  type: INTEGER
-              - column:
-                  constraints:
-                    nullable: false
-                  name: nb_quantity
-                  type: SMALLINT
-              - column:
-                  constraints:
-                    nullable: false
-                    primaryKey: true
-                    primaryKeyName: tb_auction_house_region_4_pkey
-                  name: id_region
-                  type: SMALLINT
-              - column:
-                  name: bo_sold
-                  type: BOOLEAN
-            tableName: tb_auction_house_region_4
-  - changeSet:
       id: 1745863066945-22
       author: patri (generated)
       changes:
@@ -1184,7 +854,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                   name: lb_timeleft
-                  type: AUCTION_TIMELEFT
+                  type: VARCHAR(50)
               - column:
                   constraints:
                     nullable: false
@@ -1210,86 +880,6 @@ databaseChangeLog:
                   name: dt_updated
                   type: TIMESTAMP WITHOUT TIME ZONE
             tableName: tb_commodities
-  - changeSet:
-      id: 1745863066945-33
-      author: patri (generated)
-      changes:
-        - createIndex:
-            columns:
-              - column:
-                  name: id_item
-            indexName: tb_auction_house_region_1_id_item_idx
-            tableName: tb_auction_house_region_1
-  - changeSet:
-      id: 1745863066945-34
-      author: patri (generated)
-      changes:
-        - createIndex:
-            columns:
-              - column:
-                  name: id_connected_realm
-            indexName: tb_auction_house_region_1_id_connected_realm_idx
-            tableName: tb_auction_house_region_1
-  - changeSet:
-      id: 1745863066945-35
-      author: patri (generated)
-      changes:
-        - createIndex:
-            columns:
-              - column:
-                  name: id_item
-            indexName: tb_auction_house_region_2_id_item_idx
-            tableName: tb_auction_house_region_2
-  - changeSet:
-      id: 1745863066945-36
-      author: patri (generated)
-      changes:
-        - createIndex:
-            columns:
-              - column:
-                  name: id_connected_realm
-            indexName: tb_auction_house_region_2_id_connected_realm_idx
-            tableName: tb_auction_house_region_2
-  - changeSet:
-      id: 1745863066945-37
-      author: patri (generated)
-      changes:
-        - createIndex:
-            columns:
-              - column:
-                  name: id_item
-            indexName: tb_auction_house_region_3_id_item_idx
-            tableName: tb_auction_house_region_3
-  - changeSet:
-      id: 1745863066945-38
-      author: patri (generated)
-      changes:
-        - createIndex:
-            columns:
-              - column:
-                  name: id_connected_realm
-            indexName: tb_auction_house_region_3_id_connected_realm_idx
-            tableName: tb_auction_house_region_3
-  - changeSet:
-      id: 1745863066945-39
-      author: patri (generated)
-      changes:
-        - createIndex:
-            columns:
-              - column:
-                  name: id_item
-            indexName: tb_auction_house_region_4_id_item_idx
-            tableName: tb_auction_house_region_4
-  - changeSet:
-      id: 1745863066945-40
-      author: patri (generated)
-      changes:
-        - createIndex:
-            columns:
-              - column:
-                  name: id_connected_realm
-            indexName: tb_auction_house_region_4_id_connected_realm_idx
-            tableName: tb_auction_house_region_4
   - changeSet:
       id: 1745863066945-41
       author: patri (generated)
@@ -1664,132 +1254,12 @@ databaseChangeLog:
             referencedTableName: tb_connected_realm
             validate: true
   - changeSet:
-      id: 1745863066945-59
-      author: patri (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_connected_realm
-            baseTableName: tb_auction_house_region_1
-            constraintName: tb_auction_house_tb_connected_realm_id_fk
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: id
-            referencedTableName: tb_connected_realm
-            validate: true
-  - changeSet:
-      id: 1745863066945-60
-      author: patri (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_connected_realm
-            baseTableName: tb_auction_house_region_2
-            constraintName: tb_auction_house_tb_connected_realm_id_fk
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: id
-            referencedTableName: tb_connected_realm
-            validate: true
-  - changeSet:
-      id: 1745863066945-61
-      author: patri (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_connected_realm
-            baseTableName: tb_auction_house_region_3
-            constraintName: tb_auction_house_tb_connected_realm_id_fk
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: id
-            referencedTableName: tb_connected_realm
-            validate: true
-  - changeSet:
-      id: 1745863066945-62
-      author: patri (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_connected_realm
-            baseTableName: tb_auction_house_region_4
-            constraintName: tb_auction_house_tb_connected_realm_id_fk
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: id
-            referencedTableName: tb_connected_realm
-            validate: true
-  - changeSet:
       id: 1745863066945-63
       author: patri (generated)
       changes:
         - addForeignKeyConstraint:
             baseColumnNames: id_region
             baseTableName: tb_auction_house
-            constraintName: tb_auction_house_tb_region_id_fk
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: id
-            referencedTableName: tb_region
-            validate: true
-  - changeSet:
-      id: 1745863066945-64
-      author: patri (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_region
-            baseTableName: tb_auction_house_region_1
-            constraintName: tb_auction_house_tb_region_id_fk
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: id
-            referencedTableName: tb_region
-            validate: true
-  - changeSet:
-      id: 1745863066945-65
-      author: patri (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_region
-            baseTableName: tb_auction_house_region_2
-            constraintName: tb_auction_house_tb_region_id_fk
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: id
-            referencedTableName: tb_region
-            validate: true
-  - changeSet:
-      id: 1745863066945-66
-      author: patri (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_region
-            baseTableName: tb_auction_house_region_3
-            constraintName: tb_auction_house_tb_region_id_fk
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
-            referencedColumnNames: id
-            referencedTableName: tb_region
-            validate: true
-  - changeSet:
-      id: 1745863066945-67
-      author: patri (generated)
-      changes:
-        - addForeignKeyConstraint:
-            baseColumnNames: id_region
-            baseTableName: tb_auction_house_region_4
             constraintName: tb_auction_house_tb_region_id_fk
             deferrable: false
             initiallyDeferred: false
@@ -2158,4 +1628,48 @@ databaseChangeLog:
             referencedColumnNames: id
             referencedTableName: tb_region
             validate: true
-
+  - changeSet:
+      id: 1746225163582-1
+      author: patri
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 500
+            sequenceName: tb_mk_leaderboard_group_id_tec_mk_leaderboard_group_seq
+            startValue: 1
+  - changeSet:
+      id: 1746225163582-2
+      author: patri
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: tb_mk_leaderboard_id_tec_mk_leaderboard_seq
+            startValue: 1
+  - changeSet:
+      id: 1746225163582-3
+      author: patri
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 2500
+            sequenceName: tb_mk_leaderboard_members_id_tec_mk_leaderboard_members_seq
+            startValue: 1
+  - changeSet:
+      id: 1746225163582-4
+      author: patri
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: tb_mk_period_id_tec_mk_period_seq
+            startValue: 1
+  - changeSet:
+      id: 1746225163582-5
+      author: patri
+      objectQuotingStrategy: QUOTE_ONLY_RESERVED_WORDS
+      changes:
+        - createSequence:
+            incrementBy: 1
+            sequenceName: tb_mk_season_id_tec_mk_season_seq
+            startValue: 1
