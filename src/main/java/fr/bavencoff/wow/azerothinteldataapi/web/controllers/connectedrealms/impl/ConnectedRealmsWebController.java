@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -54,9 +55,10 @@ public class ConnectedRealmsWebController {
     /**
      * Fetch all connected realms.
      *
+     * @param region Optional parameter to filter connected realms by global region
      * @return A DTO containing a list of all connected realms.
      */
-    @Operation(summary = "Fetch all connected realms", description = "Retrieve all connected realms stored in the system.")
+    @Operation(summary = "Fetch all connected realms", description = "Retrieve all connected realms stored in the system. Optionally filter by global region.")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -70,8 +72,11 @@ public class ConnectedRealmsWebController {
             )
     })
     @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<GetAllConnectedRealmResponseDto> findAll() {
-        return ResponseEntity.ok(this.connectedRealmsService.findAll());
+    public ResponseEntity<GetAllConnectedRealmResponseDto> findAll(
+            @Parameter(description = "Optional global region to filter connected realms")
+            @RequestParam(required = false) GlobalRegion region
+    ) {
+        return ResponseEntity.ok(this.connectedRealmsService.findAll(region));
     }
 
     /**

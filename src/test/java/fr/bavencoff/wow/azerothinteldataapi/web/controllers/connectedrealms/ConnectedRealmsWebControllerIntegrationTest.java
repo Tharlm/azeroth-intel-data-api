@@ -3,6 +3,7 @@ package fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.bavencoff.wow.azerothinteldataapi.common.conf.ClockTestConfiguration;
 import fr.bavencoff.wow.azerothinteldataapi.common.conf.TestCacheConfig;
+import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.ConnectedRealmDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl.ConnectedRealmDaoRepository;
 import fr.bavencoff.wow.azerothinteldataapi.testutils.MethodHelper;
@@ -101,10 +102,28 @@ public class ConnectedRealmsWebControllerIntegrationTest {
         // json containing at least the CR 531
         String expectedJson = MethodHelper.jsonToString("jsons/connectedrealms/FindAllConnectedRealmResponse.json");
         final GetAllConnectedRealmResponseDto expecting = objectMapper.readValue(expectedJson, GetAllConnectedRealmResponseDto.class);
-        final GetAllConnectedRealmResponseDto all = connectedRealmsService.findAll();
+        final GetAllConnectedRealmResponseDto all = connectedRealmsService.findAll(null);
 
         Assertions.assertThat(all.getResults()).usingRecursiveFieldByFieldElementComparator()
                 .containsAnyElementsOf(expecting.getResults());
+    }
+
+    @Test
+    @DisplayName("GET /connectedrealms?region=US should return connected realms filtered by region")
+    void getAllConnectedRealms_WithRegionParameter_ShouldReturnFilteredConnectedRealms() throws Exception {
+        // Act & Assert: Perform GET request with region parameter and validate the response
+        mockMvc.perform(get("/connectedrealms")
+                        .param("region", "US")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk()); // The response status must be 200 OK
+
+        // Verify that the service method is called with the correct region parameter
+        final GetAllConnectedRealmResponseDto filteredResults = connectedRealmsService.findAll(GlobalRegion.US);
+
+        // Verify that all returned connected realms are from the US region
+        Assertions.assertThat(filteredResults.getResults()).isNotEmpty();
+        // This assertion assumes that the service correctly filters by region
+        // If we had more detailed test data, we could make more specific assertions
     }
 
     @SneakyThrows

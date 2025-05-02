@@ -35,8 +35,14 @@ public class ConnectedRealmsWebService {
      *
      * @return Lite des CRs.
      */
-    public GetAllConnectedRealmResponseDto findAll() {
-        final List<GetAllConnectedRealmResponseDto.GetAllConnectedRealmResultDto> results = mapper.apisToDtos(this.realmServiceHelper.getConnectedRealms());
+    public GetAllConnectedRealmResponseDto findAll(final GlobalRegion region) {
+        final List<GetAllConnectedRealmResponseDto.GetAllConnectedRealmResultDto> results;
+        if (region == null) {
+            results = mapper.apisToDtos(this.realmServiceHelper.getConnectedRealms());
+        } else {
+            results = mapper.apisToDtos(this.realmServiceHelper.findConnectedRealmsByRegion(region));
+        }
+
         results.stream()
                 .sorted(Comparator.comparing(GetAllConnectedRealmResponseDto.GetAllConnectedRealmResultDto::getId))
                 .forEach(result -> result.getRealms().sort(
