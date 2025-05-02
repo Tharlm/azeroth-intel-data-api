@@ -4,6 +4,7 @@ import fr.bavencoff.wow.azerothinteldataapi.common.enums.GlobalRegion;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.ConnectedRealmDao;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.connectedrealms.exceptions.ConnectedRealmNotFoundResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,10 @@ public class ConnectedRealmDaoServiceExporter {
         this.repository = repository;
     }
 
-    @Cacheable("findConnectedRealmDaoById")
+    @Cacheable(
+            value = "findConnectedRealmDaoById",
+            unless = "#result == null"
+    )
     public ConnectedRealmDao findById(Integer id) {
         Optional<ConnectedRealmDao> connectedRealm = this.repository.findById(id);
         if (connectedRealm.isEmpty()) {
@@ -33,7 +37,10 @@ public class ConnectedRealmDaoServiceExporter {
         return this.repository.findById(id);
     }
 
-    // TODO faire le cache evict
+    @CacheEvict(
+            cacheNames = "findConnectedRealmDaoById",
+            key = "#dao.id"
+    )
     public ConnectedRealmDao saveConnectedRealmDao(ConnectedRealmDao dao) {
         return this.repository.save(dao);
     }

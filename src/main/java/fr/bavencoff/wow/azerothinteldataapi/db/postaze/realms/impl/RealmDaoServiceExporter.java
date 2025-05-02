@@ -3,6 +3,7 @@ package fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.dao.RealmDao;
 import fr.bavencoff.wow.azerothinteldataapi.web.controllers.realms.exceptions.RealmNotFoundResponseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,10 @@ public class RealmDaoServiceExporter {
         return repository.findById(id);
     }
 
-    @Cacheable("findRealmById")
+    @Cacheable(
+            value = "findRealmById",
+            unless = "#result == null"
+    )
     public RealmDao findById(Integer id) {
         final Optional<RealmDao> realmDao = this.findOptionalById(id);
         if (realmDao.isEmpty()) {
@@ -38,7 +42,10 @@ public class RealmDaoServiceExporter {
         return repository.findAll();
     }
 
-    // TODO faire la cache evict
+    @CacheEvict(
+            cacheNames = "findRealmById",
+            key = "#request.id"
+    )
     public RealmDao save(RealmDao request) {
         return repository.save(request);
     }

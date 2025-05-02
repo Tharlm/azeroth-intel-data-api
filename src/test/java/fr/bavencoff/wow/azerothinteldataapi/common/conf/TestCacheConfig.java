@@ -16,7 +16,8 @@ public class TestCacheConfig {
                 "findRegionDaoById",
                 "findRegionDaoByTag",
                 "findByKeyAndType",
-                "findConnectedRealmDaoById"
+                "findConnectedRealmDaoById",
+                "findRealmById"
         );
     }
 }
