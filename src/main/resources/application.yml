@@ -11,9 +11,9 @@ spring:
       provider: org.ehcache.jsr107.EhcacheCachingProvider
     type: jcache
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: myuser
-    password: mypassword
+    url: jdbc:postgresql://localhost:5432/azeroth_intel_db
+    username: azeroth_data_writer_user
+    password: w1+LTlM6£E^&gIz2X!G5Cg6L%u<Ys}ep!
   jpa:
     show-sql: false
     properties:

@@ -31,7 +31,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_auction_house", schema = "public", indexes = {
+@Table(name = "tb_auction_house", indexes = {
         @Index(name = "idx_auctionhousedao_id_item", columnList = "id_item")
 })
 public class AuctionHouseDao implements Serializable {

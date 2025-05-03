@@ -26,7 +26,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_item", schema = "public")
+@Table(name = "tb_item")
 @NamedEntityGraph(
         name = "get-item-graph",
         attributeNodes = {

@@ -25,7 +25,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "tb_item_class", schema = "public")
+@Table(name = "tb_item_class")
 @NamedEntityGraph(
         name = "get-item-class-graph",
         attributeNodes = {

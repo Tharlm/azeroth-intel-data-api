@@ -22,7 +22,7 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_commodities", schema = "public")
+@Table(name = "tb_commodities")
 public class CommoditiesDao {
     @Id
     @Column(name = "id", nullable = false)

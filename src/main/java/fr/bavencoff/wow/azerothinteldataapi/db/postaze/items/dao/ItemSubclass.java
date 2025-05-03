@@ -24,7 +24,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_item_subclass", schema = "public")
+@Table(name = "tb_item_subclass")
 @NamedEntityGraph(
         name = "get-item-subclass-graph",
         attributeNodes = {
