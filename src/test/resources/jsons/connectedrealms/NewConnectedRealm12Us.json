@@ -1,6 +1,6 @@
 {
   "id": 12,
-  "tagRegion": "US",
+  "region": "US",
   "queue": false,
   "population": {
     "name": "Full",

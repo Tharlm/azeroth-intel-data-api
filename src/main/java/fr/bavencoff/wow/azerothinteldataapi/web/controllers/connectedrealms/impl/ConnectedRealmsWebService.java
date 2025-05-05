@@ -65,7 +65,7 @@ public class ConnectedRealmsWebService {
         final PostConnectedRealmResponseDto dto = new PostConnectedRealmResponseDto();
         dto.setId(realmServiceHelper.createNewConnectedRealm(
                 requestDto.getId(),
-                requestDto.getTagRegion(),
+                requestDto.getRegion(),
                 this.mapper.dtoToUpdateCrModel(requestDto)
         ).getId());
         return dto;

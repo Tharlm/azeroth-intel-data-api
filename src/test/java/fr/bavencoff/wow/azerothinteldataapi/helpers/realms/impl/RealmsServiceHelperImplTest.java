@@ -168,7 +168,7 @@ class RealmsServiceHelperImplTest {
     void createNewConnectedRealm_ShouldCreateAndReturnNewConnectedRealm() {
         // Arrange
         Integer id = 1;
-        GlobalRegion tagRegion = GlobalRegion.EU;
+        GlobalRegion region = GlobalRegion.EU;
         UpdateCrModel infos = new UpdateCrModel();
         infos.setQueue(true);
 
@@ -193,19 +193,19 @@ class RealmsServiceHelperImplTest {
         ConnectedRealmBo expectedBo = new ConnectedRealmBo();
         expectedBo.setId(id);
 
-        when(regionsServiceExporter.findByTag(tagRegion)).thenReturn(regionDao);
+        when(regionsServiceExporter.findByTag(region)).thenReturn(regionDao);
         when(connectedRealmDaoServiceExporter.findOptionalById(id)).thenReturn(Optional.empty());
         when(connectedRealmDaoServiceExporter.saveConnectedRealmDao(any(ConnectedRealmDao.class))).thenReturn(connectedRealmDao);
         when(realmMapper.daoToApi(connectedRealmDao)).thenReturn(expectedBo);
 
         // Act
-        ConnectedRealmBo result = realmsServiceHelper.createNewConnectedRealm(id, tagRegion, infos);
+        ConnectedRealmBo result = realmsServiceHelper.createNewConnectedRealm(id, region, infos);
 
         // Assert
         assertNotNull(result);
         assertEquals(id, result.getId());
 
-        verify(regionsServiceExporter, times(1)).findByTag(tagRegion);
+        verify(regionsServiceExporter, times(1)).findByTag(region);
         verify(realmMapper, times(1)).daoToApi(any(ConnectedRealmDao.class));
     }
 
@@ -214,7 +214,7 @@ class RealmsServiceHelperImplTest {
     void createOrUpdateConnectedRealm_ShouldUpdateExistingConnectedRealm() {
         // Arrange
         Integer id = 1;
-        GlobalRegion tagRegion = GlobalRegion.EU;
+        GlobalRegion region = GlobalRegion.EU;
         UpdateCrModel infos = new UpdateCrModel();
         infos.setQueue(true);
 
@@ -267,19 +267,19 @@ class RealmsServiceHelperImplTest {
         expectedBo.setPopulation(populationBo);
         expectedBo.setStatus(statusBo);
 
-        when(regionsServiceExporter.findByTag(tagRegion)).thenReturn(regionDao);
+        when(regionsServiceExporter.findByTag(region)).thenReturn(regionDao);
         when(connectedRealmDaoServiceExporter.findOptionalById(id)).thenReturn(Optional.of(existingConnectedRealmDao));
         when(connectedRealmDaoServiceExporter.saveConnectedRealmDao(any(ConnectedRealmDao.class))).thenReturn(updatedConnectedRealmDao);
         when(realmMapper.daoToApi(updatedConnectedRealmDao)).thenReturn(expectedBo);
 
         // Act
-        ConnectedRealmBo result = realmsServiceHelper.createOrUpdateConnectedRealm(id, tagRegion, infos);
+        ConnectedRealmBo result = realmsServiceHelper.createOrUpdateConnectedRealm(id, region, infos);
 
         // Assert
         assertNotNull(result);
         assertEquals(id, result.getId());
 
-        verify(regionsServiceExporter, times(1)).findByTag(tagRegion);
+        verify(regionsServiceExporter, times(1)).findByTag(region);
         verify(connectedRealmDaoServiceExporter, times(1)).findOptionalById(id);
         verify(realmMapper, times(1)).daoToApi(any(ConnectedRealmDao.class));
     }

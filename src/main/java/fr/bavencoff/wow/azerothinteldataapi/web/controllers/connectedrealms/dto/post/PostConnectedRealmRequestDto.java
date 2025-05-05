@@ -23,7 +23,7 @@ public class PostConnectedRealmRequestDto {
     @NotNull
     private Integer id;
     @NotNull
-    private GlobalRegion tagRegion;
+    private GlobalRegion region;
     private boolean queue;
     @NotNull
     private GenericTypeName population;

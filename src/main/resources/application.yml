@@ -30,6 +30,9 @@ spring:
   reactor:
     context-propagation: auto
 
+server:
+  port: 8081
+
 springdoc:
   show-actuator: true
 
