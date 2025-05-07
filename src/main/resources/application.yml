@@ -2,6 +2,223 @@ blizzard-api:
   urls:
     base-url: http://localhost:3000/
 
+management:
+
+  # Actuator endpoints let you monitor and interact with your application
+  endpoints:
+    web:
+      exposure: # on decide quels endpoints exposer et pas exposer
+        include: "*"
+        exclude:
+      discovery:
+        enabled: true
+    jmx:
+      exposure:
+        include: "*"
+        exclude:
+    access:
+      default: none
+
+  # definition rule endpoint by endpoint
+  endpoint:
+    auditevents: # Exposes audit events information for the current application. Requires an AuditEventRepository bean.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    beans: # Displays a complete list of all the Spring beans in your application.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    conditions: # Shows the conditions that were evaluated on configuration and auto-configuration classes and the reasons why they did or did not match.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    configprops: # Displays a collated list of all @ConfigurationProperties. Subject to sanitization.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+      roles:
+      show-values: never
+    env: # Exposes properties from Spring’s ConfigurableEnvironment. Subject to sanitization.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+      roles:
+      show-values: never
+    flyway: # Shows any Flyway database migrations that have been applied. Requires one or more Flyway beans.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    health: # Shows application health information. TODO voir les autres pptes
+      access: unrestricted
+      cache:
+        time-to-live: 0
+      show-details: always
+    httpexchanges: # Displays HTTP exchange information (by default, the last 100 HTTP request-response exchanges). Requires an HttpExchangeRepository bean.
+      access: unrestricted
+      cache:
+        time-to-live: 0ms
+    info: # Displays arbitrary application info.
+      access: unrestricted
+      cache:
+        time-to-live: 0ms
+    integrationgraph: # Shows the Spring Integration graph. Requires a dependency on spring-integration-core.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    loggers: # Shows and modifies the configuration of loggers in the application.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    liquibase: # Shows any Liquibase database migrations that have been applied. Requires one or more Liquibase bean
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    metrics: # Shows “metrics” information for the current application.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    mappings: # Displays a collated list of all @RequestMapping paths.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    quartz: # Shows information about Quartz Scheduler jobs. Subject to sanitization.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    scheduledtasks: # Displays the scheduled tasks in your application.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    sessions: # Allows retrieval and deletion of user sessions from a Spring Session-backed session store. Requires a servlet-based web application that uses Spring Session.
+      access: unrestricted
+    shutdown: # Lets the application be gracefully shutdown. Only works when using jar packaging. Disabled by default.
+      access: unrestricted
+    startup: # Shows the startup steps data collected by the ApplicationStartup. Requires the SpringApplication to be configured with a BufferingApplicationStartup.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    threaddump: # Performs a thread dump.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    heapdump: # Returns a heap dump file. On a HotSpot JVM, an HPROF-format file is returned. On an OpenJ9 JVM, a PHD-format file is returned.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    logfile: # Returns the contents of the logfile (if the logging.file.name or the logging.file.path property has been set). Supports the use of the HTTP Range header to retrieve part of the log file’s content.
+      access: unrestricted
+      cache:
+        time-to-live: 0
+    prometheus: # Exposes metrics in a format that can be scraped by a Prometheus server. Requires a dependency on micrometer-registry-prometheus.
+      access: unrestricted
+    caches:
+      access: unrestricted
+      cache:
+        time-to-live: 0ms
+
+  # Health information
+  health:
+    # on peut configure par defaut l'activation ou pas des health indicator
+    defaults:
+      enabled: true
+    # liste des configurations
+    cassandra:
+      enabled: false
+    couchbase:
+      enabled: false
+    db:
+      enabled: true
+      ignore-routing-data-sources: false
+    diskspace:
+      enabled: true
+    elasticsearch:
+      enabled: false
+    influxdb:
+      enabled: false
+    jms:
+      enabled: false
+    ldap:
+      enabled: false
+    mail:
+      enabled: false
+    mongo:
+      enabled: false
+    neo4j:
+      enabled: false
+    ping:
+      enabled: true
+    rabbit:
+      enabled: false
+    redis:
+      enabled: false
+    # not enable by default
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+
+  ###########
+  # Tracing #
+  ###########
+
+  # on fait le tracing avec opentelemetry, en important les librairies de opentelemetry
+  # on désactive par défaut le tracing intégré via springboot
+  tracing:
+    enabled: false
+
+  ###########
+  # Metrics #
+  ###########
+
+  # configuration des par defaut des Metrics: on desactive tous les exports, on va les activer à la main un à un s'il le faut
+  defaults:
+    metrics:
+      export:
+        enabled: false
+
+  # configuration des Metrics par Systeme de monitoring
+  appoptics.metrics.export.enabled: false
+  atlas.metrics.export.enabled: false
+  datadog.metrics.export.enabled: false
+  dynatrace.metrics.export.enabled: false
+  elastic.metrics.export.enabled: false
+  ganglia.metrics.export.enabled: false
+  graphite.metrics.export.enabled: false
+  humio.metrics.export.enabled: false
+  influx.metrics.export.enabled: false
+  jmx.metrics.export.enabled: true
+  kairos.metrics.export.enabled: false
+  newrelic.metrics.export.enabled: false
+  #  prometheus.metrics.export.enabled: false
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  signalfx.metrics.export.enabled: false
+  simple.metrics.export.enabled: false
+  stackdriver.metrics.export.enabled: false
+  statsd.metrics.export.enabled: false
+  wavefront.metrics.export.enabled: false
+  otlp:
+    metrics:
+      export:
+        enabled: true
+
+otel:
+  propagators: tracecontext
+  traces:
+    exporter: otlp
+  metrics:
+    exporter: none
+  logs:
+    exporter: none
+  exporter:
+    otlp:
+      endpoint: http://localhost:4318
+#      endpoint: http://wow-otel-collector:4317
+
 spring:
   application:
     name: azeroth-intel-data-api
