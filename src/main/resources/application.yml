@@ -191,27 +191,20 @@ management:
   jmx.metrics.export.enabled: true
   kairos.metrics.export.enabled: false
   newrelic.metrics.export.enabled: false
-  #  prometheus.metrics.export.enabled: false
-  prometheus:
-    metrics:
-      export:
-        enabled: true
+  prometheus.metrics.export.enabled: false
   signalfx.metrics.export.enabled: false
   simple.metrics.export.enabled: false
   stackdriver.metrics.export.enabled: false
   statsd.metrics.export.enabled: false
   wavefront.metrics.export.enabled: false
-  otlp:
-    metrics:
-      export:
-        enabled: true
+  otlp.metrics.export.enabled: false
 
 otel:
   propagators: tracecontext
   traces:
     exporter: otlp
   metrics:
-    exporter: none
+    exporter: otlp
   logs:
     exporter: none
   exporter:
