@@ -206,7 +206,7 @@ otel:
   metrics:
     exporter: otlp
   logs:
-    exporter: none
+    exporter: otlp
   exporter:
     otlp:
       endpoint: http://localhost:4318
