@@ -1,7 +1,3 @@
-blizzard-api:
-  urls:
-    base-url: http://localhost:3000/
-
 management:
 
   # Actuator endpoints let you monitor and interact with your application
@@ -209,8 +205,7 @@ otel:
     exporter: otlp
   exporter:
     otlp:
-      endpoint: http://localhost:4318
-#      endpoint: http://wow-otel-collector:4317
+      endpoint: ${tag.otel.exporter.otlp.endpoint}
 
 spring:
   application:
@@ -221,9 +216,9 @@ spring:
       provider: org.ehcache.jsr107.EhcacheCachingProvider
     type: jcache
   datasource:
-    url: jdbc:postgresql://localhost:5432/azeroth_intel_db
-    username: azeroth_data_writer_user
-    password: w1+LTlM6£E^&gIz2X!G5Cg6L%u<Ys}ep!
+    url: ${tag.spring.datasource.url}
+    username: ${tag.spring.datasource.username}
+    password: ${tag.spring.datasource.password}
   jpa:
     show-sql: false
     properties:
@@ -237,6 +232,8 @@ spring:
     change-log: classpath:/db/changelog/db.changelog-master.yaml
     enabled: false
     default-schema: public
+  profiles:
+    active: local # à surcharger dans le Dockerfile pour mettre "prod"
   reactor:
     context-propagation: auto
 

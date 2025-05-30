@@ -118,7 +118,7 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
             connectedRealmDao.setId(id);
             return this.saveConnectedRealm(connectedRealmDao, region, infos);
         }
-        return this.updateConnectedRelm(optionalById.get(), region, infos);
+        return this.updateConnectedRealm(optionalById.get(), region, infos);
     }
 
     /**
@@ -153,7 +153,7 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
      * @param infos             information
      * @return entité màj
      */
-    private ConnectedRealmDao updateConnectedRelm(
+    private ConnectedRealmDao updateConnectedRealm(
             ConnectedRealmDao connectedRealmDao,
             RegionDao region,
             UpdateCrModel infos
