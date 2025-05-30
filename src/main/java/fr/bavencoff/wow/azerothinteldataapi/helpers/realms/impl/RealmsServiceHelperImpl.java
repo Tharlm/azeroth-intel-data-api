@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class RealmsServiceHelperImpl implements RealmServiceHelper {
@@ -64,6 +65,13 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
     public List<ConnectedRealmBo> findConnectedRealmsByRegion(GlobalRegion region) {
         return connectedRealmDaoServiceExporter.findAllByRegion_Tag(region)
                 .stream()
+                .map(realmMapper::daoToApi)
+                .toList();
+    }
+
+    @Override
+    public List<ConnectedRealmBo> findConnectedRealmsByRegions(Set<GlobalRegion> regions) {
+        return connectedRealmDaoServiceExporter.findAllByRegions(regions).stream()
                 .map(realmMapper::daoToApi)
                 .toList();
     }

@@ -21,4 +21,7 @@ public interface ConnectedRealmDaoRepository extends JpaRepository<ConnectedReal
     @EntityGraph(value = "cr-entity-graph")
     @NonNull
     List<ConnectedRealmDao> findAllByRegion_Tag(@NonNull GlobalRegion globalRegion);
+
+    @EntityGraph(value = "cr-entity-graph")
+    List<ConnectedRealmDao> findAllByRegion_TagIn(@NonNull List<GlobalRegion> globalRegions);
 }

@@ -24,8 +24,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -161,6 +163,82 @@ class RealmsServiceHelperImplTest {
         verify(connectedRealmDaoServiceExporter, times(1)).findAllByRegion_Tag(region);
         verify(realmMapper, times(1)).daoToApi(connectedRealmDao1);
         verify(realmMapper, times(1)).daoToApi(connectedRealmDao2);
+    }
+
+    @Test
+    @DisplayName("findConnectedRealmsByRegions should return connected realms for the specified regions")
+    void findConnectedRealmsByRegions_ShouldReturnConnectedRealmsForRegions() {
+        // Arrange
+        Set<GlobalRegion> regions = new HashSet<>(Arrays.asList(GlobalRegion.EU, GlobalRegion.US));
+
+        ConnectedRealmDao connectedRealmDao1 = new ConnectedRealmDao();
+        connectedRealmDao1.setId(1);
+
+        ConnectedRealmDao connectedRealmDao2 = new ConnectedRealmDao();
+        connectedRealmDao2.setId(2);
+
+        List<ConnectedRealmDao> connectedRealmDaos = Arrays.asList(connectedRealmDao1, connectedRealmDao2);
+
+        ConnectedRealmBo connectedRealmBo1 = new ConnectedRealmBo();
+        connectedRealmBo1.setId(1);
+
+        ConnectedRealmBo connectedRealmBo2 = new ConnectedRealmBo();
+        connectedRealmBo2.setId(2);
+
+        when(connectedRealmDaoServiceExporter.findAllByRegions(regions)).thenReturn(connectedRealmDaos);
+        when(realmMapper.daoToApi(connectedRealmDao1)).thenReturn(connectedRealmBo1);
+        when(realmMapper.daoToApi(connectedRealmDao2)).thenReturn(connectedRealmBo2);
+
+        // Act
+        List<ConnectedRealmBo> result = realmsServiceHelper.findConnectedRealmsByRegions(regions);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(2, result.size());
+        assertEquals(1, result.get(0).getId());
+        assertEquals(2, result.get(1).getId());
+
+        verify(connectedRealmDaoServiceExporter, times(1)).findAllByRegions(regions);
+        verify(realmMapper, times(1)).daoToApi(connectedRealmDao1);
+        verify(realmMapper, times(1)).daoToApi(connectedRealmDao2);
+    }
+
+    @Test
+    @DisplayName("findConnectedRealmsByRegions should return empty list when empty set of regions is provided")
+    void findConnectedRealmsByRegions_ShouldReturnEmptyList_WhenEmptySetOfRegionsProvided() {
+        // Arrange
+        Set<GlobalRegion> regions = new HashSet<>();
+        List<ConnectedRealmDao> emptyList = List.of();
+
+        when(connectedRealmDaoServiceExporter.findAllByRegions(regions)).thenReturn(emptyList);
+
+        // Act
+        List<ConnectedRealmBo> result = realmsServiceHelper.findConnectedRealmsByRegions(regions);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(0, result.size());
+
+        verify(connectedRealmDaoServiceExporter, times(1)).findAllByRegions(regions);
+    }
+
+    @Test
+    @DisplayName("findConnectedRealmsByRegions should return empty list when regions with no connected realms are provided")
+    void findConnectedRealmsByRegions_ShouldReturnEmptyList_WhenRegionsWithNoConnectedRealmsProvided() {
+        // Arrange
+        Set<GlobalRegion> regions = new HashSet<>(Arrays.asList(GlobalRegion.KR, GlobalRegion.TW));
+        List<ConnectedRealmDao> emptyList = List.of();
+
+        when(connectedRealmDaoServiceExporter.findAllByRegions(regions)).thenReturn(emptyList);
+
+        // Act
+        List<ConnectedRealmBo> result = realmsServiceHelper.findConnectedRealmsByRegions(regions);
+
+        // Assert
+        assertNotNull(result);
+        assertEquals(0, result.size());
+
+        verify(connectedRealmDaoServiceExporter, times(1)).findAllByRegions(regions);
     }
 
     @Test

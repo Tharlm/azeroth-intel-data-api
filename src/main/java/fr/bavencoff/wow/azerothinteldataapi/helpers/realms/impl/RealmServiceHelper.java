@@ -6,6 +6,7 @@ import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.RealmBo;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model.UpdateCrModel;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Methode generique pour le realms et connected realms
@@ -34,6 +35,8 @@ public interface RealmServiceHelper {
      * @return Liste des CRs de la région
      */
     List<ConnectedRealmBo> findConnectedRealmsByRegion(GlobalRegion region);
+
+    List<ConnectedRealmBo> findConnectedRealmsByRegions(Set<GlobalRegion> regions);
 
     /**
      * Crée un nouveau CR. Renvoie une exception s'il existe déjà un CR avec la même ID.

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ConnectedRealmDaoServiceExporter {
@@ -51,5 +52,9 @@ public class ConnectedRealmDaoServiceExporter {
 
     public List<ConnectedRealmDao> findAllByRegion_Tag(GlobalRegion globalRegion) {
         return this.repository.findAllByRegion_Tag(globalRegion);
+    }
+
+    public List<ConnectedRealmDao> findAllByRegions(Set<GlobalRegion> globalRegion) {
+        return this.repository.findAllByRegion_TagIn(globalRegion.stream().toList());
     }
 }

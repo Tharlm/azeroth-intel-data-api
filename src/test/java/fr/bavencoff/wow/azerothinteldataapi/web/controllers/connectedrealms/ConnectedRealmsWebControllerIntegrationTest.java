@@ -25,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Optional;
+import java.util.Set;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -102,23 +103,24 @@ public class ConnectedRealmsWebControllerIntegrationTest {
         // json containing at least the CR 531
         String expectedJson = MethodHelper.jsonToString("jsons/connectedrealms/FindAllConnectedRealmResponse.json");
         final GetAllConnectedRealmResponseDto expecting = objectMapper.readValue(expectedJson, GetAllConnectedRealmResponseDto.class);
-        final GetAllConnectedRealmResponseDto all = connectedRealmsService.findAll(null);
+        final GetAllConnectedRealmResponseDto all = connectedRealmsService.findAll(null); // null Set will return all connected realms
 
         Assertions.assertThat(all.getResults()).usingRecursiveFieldByFieldElementComparator()
                 .containsAnyElementsOf(expecting.getResults());
     }
 
     @Test
-    @DisplayName("GET /connectedrealms?region=US should return connected realms filtered by region")
-    void getAllConnectedRealms_WithRegionParameter_ShouldReturnFilteredConnectedRealms() throws Exception {
-        // Act & Assert: Perform GET request with region parameter and validate the response
+    @DisplayName("GET /connectedrealms?regions=US should return connected realms filtered by regions")
+    void getAllConnectedRealms_WithRegionsParameter_ShouldReturnFilteredConnectedRealms() throws Exception {
+        // Act & Assert: Perform GET request with regions parameter and validate the response
         mockMvc.perform(get("/connectedrealms")
-                        .param("region", "US")
+                        .param("regions", "US")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk()); // The response status must be 200 OK
 
-        // Verify that the service method is called with the correct region parameter
-        final GetAllConnectedRealmResponseDto filteredResults = connectedRealmsService.findAll(GlobalRegion.US);
+        // Verify that the service method is called with the correct regions parameter
+        Set<GlobalRegion> regions = Set.of(GlobalRegion.US);
+        final GetAllConnectedRealmResponseDto filteredResults = connectedRealmsService.findAll(regions);
 
         // Verify that all returned connected realms are from the US region
         Assertions.assertThat(filteredResults.getResults()).isNotEmpty();

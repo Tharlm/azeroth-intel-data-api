@@ -32,6 +32,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Set;
+
 /**
  * Controller class for managing connected realms.
  * This controller provides endpoints to retrieve, create, and update information about World of Warcraft connected realms.
@@ -55,10 +57,10 @@ public class ConnectedRealmsWebController {
     /**
      * Fetch all connected realms.
      *
-     * @param region Optional parameter to filter connected realms by global region
+     * @param regions Optional set of parameters to filter connected realms by global regions
      * @return A DTO containing a list of all connected realms.
      */
-    @Operation(summary = "Fetch all connected realms", description = "Retrieve all connected realms stored in the system. Optionally filter by global region.")
+    @Operation(summary = "Fetch all connected realms", description = "Retrieve all connected realms stored in the system. Optionally filter by global regions.")
     @ApiResponses(value = {
             @ApiResponse(
                     responseCode = "200",
@@ -73,10 +75,10 @@ public class ConnectedRealmsWebController {
     })
     @GetMapping(path = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GetAllConnectedRealmResponseDto> findAll(
-            @Parameter(description = "Optional global region to filter connected realms")
-            @RequestParam(required = false) GlobalRegion region
+            @Parameter(description = "Optional set of global regions to filter connected realms")
+            @RequestParam(required = false) Set<GlobalRegion> regions
     ) {
-        return ResponseEntity.ok(this.connectedRealmsService.findAll(region));
+        return ResponseEntity.ok(this.connectedRealmsService.findAll(regions));
     }
 
     /**

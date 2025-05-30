@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ConnectedRealmsWebService {
@@ -33,14 +34,17 @@ public class ConnectedRealmsWebService {
     /**
      * Renvoie la liste des CRs.
      *
-     * @return Lite des CRs.
+     * @param regions Set of regions to filter by
+     * @return Liste des CRs.
      */
-    public GetAllConnectedRealmResponseDto findAll(final GlobalRegion region) {
+    public GetAllConnectedRealmResponseDto findAll(final Set<GlobalRegion> regions) {
         final List<GetAllConnectedRealmResponseDto.GetAllConnectedRealmResultDto> results;
-        if (region == null) {
+
+        if (regions == null || regions.isEmpty()) {
+            // If no regions specified, get all connected realms
             results = mapper.apisToDtos(this.realmServiceHelper.getConnectedRealms());
         } else {
-            results = mapper.apisToDtos(this.realmServiceHelper.findConnectedRealmsByRegion(region));
+            results = mapper.apisToDtos(this.realmServiceHelper.findConnectedRealmsByRegions(regions));
         }
 
         results.stream()
