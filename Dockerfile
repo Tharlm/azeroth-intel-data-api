@@ -9,9 +9,13 @@ RUN mvn clean package -DskipTests
 FROM amazoncorretto:21
 WORKDIR /app
 
-COPY --from=build /app/target/azeroth-intel-data-api-0.0.1-SNAPSHOT.war app.jar
+COPY --from=build /app/target/azeroth-intel-data-api-0.1.1.war app.jar
+
+# Copie du script entrypoint
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 # Profil par défaut (modifiable via variable d’environnement)
 ENV SPRING_PROFILES_ACTIVE=prod
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["/entrypoint.sh"]

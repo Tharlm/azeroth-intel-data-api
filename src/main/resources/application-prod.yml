@@ -5,6 +5,6 @@ tag:
         endpoint: http://otel-collector:4318
   spring:
     datasource:
-      url: jdbc:postgresql://azeroth-postgre:5432/azeroth_intel_db
-      username: azeroth_data_writer_user
-      password: w1+LTlM6£E^&gIz2X!G5Cg6L%u<Ys}ep!
+      url: ${SPRING_DATASOURCE_URL}
+      username: ${SPRING_DATASOURCE_USERNAME}
+      password: ${SPRING_DATASOURCE_PASSWORD}
