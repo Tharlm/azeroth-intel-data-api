@@ -2,7 +2,7 @@ tag:
   otel:
     exporter:
       otlp:
-        endpoint: http://otel-collector:4318
+        endpoint: http://tharlm-otel-collector:4318
   spring:
     datasource:
       url: ${SPRING_DATASOURCE_URL}
