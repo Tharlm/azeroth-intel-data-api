@@ -112,7 +112,7 @@ public class PlayableApiServiceImpl implements PlayableClassApiService, Playable
         // pour chaque PC fournies
         information.getClasses().forEach(pcInfos -> {
 
-            // on regarde si elle existe en DB
+            // on regarde si elle existe en dans les races fournies avec l'entité
             final Optional<PlayableClassDao> optionalPlayableClassDao = playableRaceDao.getClasses().stream().filter(pc ->
                     NumberUtils.equals(pcInfos.getId(), pc.getId())
             ).findFirst();
@@ -120,7 +120,7 @@ public class PlayableApiServiceImpl implements PlayableClassApiService, Playable
             PlayableClassDao playableClass;
 
             // si elle, on ne fait rien
-            // sis elle existe pas, on check en DB si elle existe.
+            // si n'elle existe pas, on check en DB si elle existe.
             if (optionalPlayableClassDao.isEmpty()) {
                 final Optional<PlayableClassDao> optionalById = playableClassServiceExporter.findOptionalById(pcInfos.getId());
 
