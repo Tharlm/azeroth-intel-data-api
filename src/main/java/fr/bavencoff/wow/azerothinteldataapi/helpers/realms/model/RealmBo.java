@@ -1,7 +1,7 @@
 package fr.bavencoff.wow.azerothinteldataapi.helpers.realms.model;
 
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmHelper;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.model.ParameterBo;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.impl.RealmHelper;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.regions.model.RegionBo;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

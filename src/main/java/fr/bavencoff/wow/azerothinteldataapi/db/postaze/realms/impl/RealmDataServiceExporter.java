@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class RealmDaoServiceExporter {
+public class RealmDataServiceExporter {
 
     private final RealmsRepository repository;
 
     @Autowired
-    public RealmDaoServiceExporter(
+    public RealmDataServiceExporter(
             final RealmsRepository repository
     ) {
         this.repository = repository;

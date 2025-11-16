@@ -2,8 +2,8 @@ package fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.dao;
 
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.ConnectedRealmDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.ParameterTypeDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmHelper;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
+import fr.bavencoff.wow.azerothinteldataapi.helpers.realms.impl.RealmHelper;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

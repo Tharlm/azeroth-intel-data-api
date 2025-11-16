@@ -7,7 +7,7 @@ import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.Conne
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl.ConnectedRealmDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.ParameterTypeDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.dao.RealmDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmDaoServiceExporter;
+import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmDataServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.impl.RegionDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl.ParametersServiceHelper;
@@ -49,7 +49,7 @@ import static org.mockito.Mockito.when;
 class RealmsServiceHelperImplTest {
 
     @Mock
-    private RealmDaoServiceExporter realmDaoServiceExporter;
+    private RealmDataServiceExporter realmDataServiceExporter;
 
     @Mock
     private RegionDaoServiceExporter regionsServiceExporter;
@@ -375,7 +375,7 @@ class RealmsServiceHelperImplTest {
         expectedBo.setId(realmId);
         expectedBo.setName("Test Realm");
 
-        when(realmDaoServiceExporter.findById(realmId)).thenReturn(realmDao);
+        when(realmDataServiceExporter.findById(realmId)).thenReturn(realmDao);
         when(realmMapper.daoToApi(realmDao)).thenReturn(expectedBo);
 
         // Act
@@ -386,7 +386,7 @@ class RealmsServiceHelperImplTest {
         assertEquals(realmId, result.getId());
         assertEquals("Test Realm", result.getName());
 
-        verify(realmDaoServiceExporter, times(1)).findById(realmId);
+        verify(realmDataServiceExporter, times(1)).findById(realmId);
         verify(realmMapper, times(1)).daoToApi(realmDao);
     }
 
@@ -414,7 +414,7 @@ class RealmsServiceHelperImplTest {
 
         List<RealmBo> expectedBos = Arrays.asList(realmBo1, realmBo2);
 
-        when(realmDaoServiceExporter.findAll()).thenReturn(realmDaos);
+        when(realmDataServiceExporter.findAll()).thenReturn(realmDaos);
         when(realmMapper.daosToApis(realmDaos)).thenReturn(expectedBos);
 
         // Act
@@ -428,7 +428,7 @@ class RealmsServiceHelperImplTest {
         assertEquals(2, result.get(1).getId());
         assertEquals("Realm 2", result.get(1).getName());
 
-        verify(realmDaoServiceExporter, times(1)).findAll();
+        verify(realmDataServiceExporter, times(1)).findAll();
         verify(realmMapper, times(1)).daosToApis(realmDaos);
     }
 }

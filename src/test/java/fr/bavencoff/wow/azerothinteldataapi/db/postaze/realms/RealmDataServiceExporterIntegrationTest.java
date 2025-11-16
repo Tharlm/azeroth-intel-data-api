@@ -3,7 +3,7 @@ package fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms;
 import fr.bavencoff.wow.azerothinteldataapi.common.conf.ClockTestConfiguration;
 import fr.bavencoff.wow.azerothinteldataapi.common.conf.TestCacheConfig;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.dao.RealmDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmDaoServiceExporter;
+import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmDataServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmsRepository;
 import fr.bavencoff.wow.azerothinteldataapi.testutils.mocks.RealmsMock;
 import org.junit.jupiter.api.Test;
@@ -23,10 +23,10 @@ import static org.mockito.Mockito.times;
 @Import({TestCacheConfig.class, ClockTestConfiguration.class})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @EnableCaching
-public class RealmDaoServiceExporterIntegrationTest {
+public class RealmDataServiceExporterIntegrationTest {
 
     @Autowired
-    private RealmDaoServiceExporter service;
+    private RealmDataServiceExporter service;
 
     @MockitoSpyBean
     private RealmsRepository spyRepository;

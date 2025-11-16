@@ -6,7 +6,7 @@ import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.dao.Conne
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.connectedrealms.impl.ConnectedRealmDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.parameters.dao.ParameterTypeDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.dao.RealmDao;
-import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmDaoServiceExporter;
+import fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl.RealmDataServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.dao.RegionDao;
 import fr.bavencoff.wow.azerothinteldataapi.db.postaze.region.impl.RegionDaoServiceExporter;
 import fr.bavencoff.wow.azerothinteldataapi.helpers.parameters.impl.ParametersServiceHelper;
@@ -28,7 +28,7 @@ import java.util.Set;
 @Service
 public class RealmsServiceHelperImpl implements RealmServiceHelper {
 
-    private final RealmDaoServiceExporter realmDaoServiceExporter;
+    private final RealmDataServiceExporter realmDataServiceExporter;
     private final RegionDaoServiceExporter regionsServiceExporter;
     private final ParametersServiceHelper typeServiceHelper;
     private final ConnectedRealmDaoServiceExporter connectedRealmDaoServiceExporter;
@@ -36,13 +36,13 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
 
     @Autowired
     public RealmsServiceHelperImpl(
-            final RealmDaoServiceExporter realmDaoServiceExporter,
+            final RealmDataServiceExporter realmDataServiceExporter,
             final RegionDaoServiceExporter regionsServiceExporter,
             final ParametersServiceHelper typeServiceHelper,
             final ConnectedRealmDaoServiceExporter connectedRealmDaoServiceExporter,
             final RealmBoMapper realmMapper
     ) {
-        this.realmDaoServiceExporter = realmDaoServiceExporter;
+        this.realmDataServiceExporter = realmDataServiceExporter;
         this.regionsServiceExporter = regionsServiceExporter;
         this.typeServiceHelper = typeServiceHelper;
         this.connectedRealmDaoServiceExporter = connectedRealmDaoServiceExporter;
@@ -98,12 +98,12 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
 
     @Override
     public RealmBo getRealm(Integer idRealm) {
-        return realmMapper.daoToApi(realmDaoServiceExporter.findById(idRealm));
+        return realmMapper.daoToApi(realmDataServiceExporter.findById(idRealm));
     }
 
     @Override
     public List<RealmBo> getRealms() {
-        return realmMapper.daosToApis(realmDaoServiceExporter.findAll());
+        return realmMapper.daosToApis(realmDataServiceExporter.findAll());
     }
 
 
@@ -250,7 +250,7 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
             RegionDao region,
             UpdateRealmModel info
     ) {
-        Optional<RealmDao> optionalRealm = this.realmDaoServiceExporter.findOptionalById(id);
+        Optional<RealmDao> optionalRealm = this.realmDataServiceExporter.findOptionalById(id);
         if (optionalRealm.isEmpty()) {
             RealmDao realmDao = new RealmDao();
             realmDao.setId(id);
@@ -310,7 +310,7 @@ public class RealmsServiceHelperImpl implements RealmServiceHelper {
         realmDao.setTournament(info.isTournament());
         realmDao.setDateLastUpdate(Instant.now());
         realmDao.setActive(true);
-        return this.realmDaoServiceExporter.save(realmDao);
+        return this.realmDataServiceExporter.save(realmDao);
     }
 
 }

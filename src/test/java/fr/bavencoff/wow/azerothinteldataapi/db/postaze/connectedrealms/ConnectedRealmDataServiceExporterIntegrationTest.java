@@ -23,7 +23,7 @@ import static org.mockito.Mockito.times;
 @Import({TestCacheConfig.class, ClockTestConfiguration.class})
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @EnableCaching
-public class ConnectedRealmDaoServiceExporterIntegrationTest {
+public class ConnectedRealmDataServiceExporterIntegrationTest {
 
     @Autowired
     private ConnectedRealmDaoServiceExporter service;

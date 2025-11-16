@@ -1,4 +1,4 @@
-package fr.bavencoff.wow.azerothinteldataapi.db.postaze.realms.impl;
+package fr.bavencoff.wow.azerothinteldataapi.helpers.realms.impl;
 
 public final class RealmHelper {
     public static final int REALM_NAME_MAX_LENGTH = 50;
